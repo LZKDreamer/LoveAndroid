@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">爱安卓</string>
+    <string name="loading">加载中</string>
+    <string name="error">出错啦!</string>
+    <string name="reload">重新加载</string>
+    <string name="empty">这里什么都没有</string>
+</resources>
