@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tab_home"
+        android:enabled="true"
+        android:icon="@drawable/icon_tab_home"
+        app:showAsAction="always"
+        android:title="@string/tab_home"/>
+    <item
+        android:id="@+id/tab_knowledge"
+        android:enabled="true"
+        android:icon="@drawable/icon_tab_knowledge"
+        app:showAsAction="always"
+        android:title="@string/tab_knowledge_system"/>
+    <item
+        android:id="@+id/tab_wx_article"
+        android:enabled="true"
+        android:icon="@drawable/icon_tab_wx"
+        app:showAsAction="always"
+        android:title="@string/tab_wx_article"/>
+    <item
+        android:id="@+id/tab_navigation"
+        android:enabled="true"
+        android:icon="@drawable/icon_tab_nav"
+        app:showAsAction="always"
+        android:title="@string/tab_navigation"/>
+    <item
+        android:id="@+id/tab_project"
+        android:enabled="true"
+        android:icon="@drawable/icon_tab_project"
+        app:showAsAction="always"
+        android:title="@string/tab_project"/>
+</menu>

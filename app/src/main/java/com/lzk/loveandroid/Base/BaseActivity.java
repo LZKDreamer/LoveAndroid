@@ -1,8 +1,8 @@
 package com.lzk.loveandroid.Base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,36 +43,34 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         mPageContentView = (ViewGroup) findViewById(R.id.page_content_view);
-        if (mPageContentView == null) {
-            throw new IllegalStateException(
-                    "The subclass of RootActivity must contain a View named 'mPageContentView'.");
-        }
-        if (!(mPageContentView.getParent() instanceof ViewGroup)) {
-            throw new IllegalStateException(
-                    "mPageContentView's ParentView should be a ViewGroup.");
-        }
-        ViewGroup mParent = (ViewGroup) mPageContentView.getParent();
-        View.inflate(this, R.layout.layout_loading_view, mParent);
-        View.inflate(this, R.layout.layout_error_view, mParent);
-        View.inflate(this,R.layout.layout_empty_view,mParent);
-        mLoadingView = mParent.findViewById(R.id.loading_group_fl);
-        mEmptyView = mParent.findViewById(R.id.empty_group_fl);
-        mErrorView = mParent.findViewById(R.id.error_group_fl);
-        mLoadingContentTv = mLoadingView.findViewById(R.id.loading_tip_tv);
-        mEmptyContentTv = mEmptyView.findViewById(R.id.empty_tip_tv);
-        mErrorContentTv = mErrorView.findViewById(R.id.error_tip_tv);
+        if (mPageContentView != null) {
+            if (!(mPageContentView.getParent() instanceof ViewGroup)) {
+                throw new IllegalStateException(
+                        "mPageContentView's ParentView should be a ViewGroup.");
+            }
+            ViewGroup mParent = (ViewGroup) mPageContentView.getParent();
+            View.inflate(this, R.layout.layout_loading_view, mParent);
+            View.inflate(this, R.layout.layout_error_view, mParent);
+            View.inflate(this,R.layout.layout_empty_view,mParent);
+            mLoadingView = mParent.findViewById(R.id.loading_group_fl);
+            mEmptyView = mParent.findViewById(R.id.empty_group_fl);
+            mErrorView = mParent.findViewById(R.id.error_group_fl);
+            mLoadingContentTv = mLoadingView.findViewById(R.id.loading_tip_tv);
+            mEmptyContentTv = mEmptyView.findViewById(R.id.empty_tip_tv);
+            mErrorContentTv = mErrorView.findViewById(R.id.error_tip_tv);
 
-        //重新加载按钮的点击事件
-        Button mErrorBtn = mErrorView.findViewById(R.id.error_reload_btn);
-        mErrorBtn.setOnClickListener(this);
-        Button mEmptyBtn = mEmptyView.findViewById(R.id.empty_reload_btn);
-        mEmptyBtn.setOnClickListener(this);
+            //重新加载按钮的点击事件
+            Button mErrorBtn = mErrorView.findViewById(R.id.error_reload_btn);
+            mErrorBtn.setOnClickListener(this);
+            Button mEmptyBtn = mEmptyView.findViewById(R.id.empty_reload_btn);
+            mEmptyBtn.setOnClickListener(this);
 
-        //初始化状态显示
-        mLoadingView.setVisibility(View.GONE);
-        mErrorView.setVisibility(View.GONE);
-        mEmptyView.setVisibility(View.GONE);
-        mPageContentView.setVisibility(View.VISIBLE);
+            //初始化状态显示
+            mLoadingView.setVisibility(View.GONE);
+            mErrorView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.GONE);
+            mPageContentView.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

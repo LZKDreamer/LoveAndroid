@@ -21,13 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/empty"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/dp_10"/>
         <Button
             android:id="@+id/empty_reload_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reload"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/bg_reload_btn"/>
     </LinearLayout>

@@ -1,7 +1,26 @@
 <resources>
     <string name="app_name">爱安卓</string>
+    
+    //状态提示
     <string name="loading">加载中</string>
     <string name="error">出错啦!</string>
     <string name="reload">重新加载</string>
     <string name="empty">这里什么都没有</string>
+    
+    //导航栏
+    <string name="tab_home">首页</string>
+    <string name="tab_knowledge_system">知识体系</string>
+    <string name="tab_wx_article">公众号</string>
+    <string name="tab_navigation">导航</string>
+    <string name="tab_project">导航</string>
+
+    //Toolbar菜单
+    <string name="website">常用网站</string>
+    <string name="search">搜索</string>
+
+    //抽屉菜单
+    <string name="drawer_nav_favorite">收藏</string>
+    <string name="drawer_nav_setting">设置</string>
+    <string name="drawer_nav_about_us">关于我们</string>
+    <string name="drawer_header_username">用户名</string>
 </resources>

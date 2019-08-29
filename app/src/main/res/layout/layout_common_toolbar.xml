@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/common_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:background="@color/colorPrimaryToolbar"
+    app:layout_scrollFlags="scroll|enterAlways|snap">
+    <TextView
+        android:id="@+id/common_toolbar_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:text="标题"
+        />
+</androidx.appcompat.widget.Toolbar>
