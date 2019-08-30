@@ -14,7 +14,7 @@ import com.lzk.loveandroid.R;
  * @author LiaoZhongKai
  * @date 2019/8/28.
  */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener, IBaseActivity{
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener, IBaseView {
 
     /**
      * 页面加载状态
@@ -36,6 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private TextView mLoadingContentTv;
     private TextView mEmptyContentTv;
     private TextView mErrorContentTv;
+
+    //日志
 
 
     @Override
@@ -167,5 +169,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void showPageContent() {
+        if (currentState == NORMAL_STATE) {
+            return;
+        }
+        hideCurrentView();
+        currentState = NORMAL_STATE;
+        mPageContentView.setVisibility(View.VISIBLE);
     }
 }

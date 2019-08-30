@@ -29,8 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_back_top"
-            android:background="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimary"
             android:layout_gravity="right|bottom"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="70dp"
             />
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_nav_view"
