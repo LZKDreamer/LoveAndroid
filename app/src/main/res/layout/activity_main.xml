@@ -33,6 +33,7 @@
             android:layout_gravity="right|bottom"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="70dp"
+            app:layout_behavior="@string/bye_burger_float_behavior"
             />
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_nav_view"

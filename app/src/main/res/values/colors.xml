@@ -6,4 +6,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorPrimaryToolbar">#3CB371</color>
     <color name="color_tab_item_normal">#A9A9A9</color>
+    <color name="color_article_tag">#D81B60</color>
+    <color name="color_article_author">#D3D3D3</color>
 </resources>
