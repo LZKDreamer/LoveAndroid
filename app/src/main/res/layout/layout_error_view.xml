@@ -21,14 +21,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/error"
-            android:layout_marginTop="@dimen/dp_10"/>
+            android:layout_marginTop="@dimen/dp_10"
+            />
         <Button
             android:id="@+id/error_reload_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reload"
             android:layout_marginTop="@dimen/dp_10"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/bg_reload_btn"/>
     </LinearLayout>
 </FrameLayout>

@@ -225,6 +225,17 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.main_float_btn)
     public void onViewClicked() {
+        backToTop();
+    }
+
+    private void backToTop(){
+        if (mHomeFragment != null){
+            if (mHomeFragment.isVisible()){
+                mHomeFragment.backToTop();
+                return;
+            }
+        }
+
 
     }
 }

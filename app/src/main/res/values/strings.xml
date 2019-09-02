@@ -6,6 +6,7 @@
     <string name="error">出错啦!</string>
     <string name="reload">重新加载</string>
     <string name="empty">这里什么都没有</string>
+    <string name="network_error">网络异常,请检查网络</string>
 
     //导航栏
     <string name="tab_home">首页</string>

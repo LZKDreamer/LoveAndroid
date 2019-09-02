@@ -1,18 +1,30 @@
 package com.lzk.loveandroid.Home.Fragment;
 
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
+import com.lzk.loveandroid.App.MyApplication;
 import com.lzk.loveandroid.Base.BaseFragment;
 import com.lzk.loveandroid.Home.Adapter.HomeArticleAdapter;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
+import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
+import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
+import com.lzk.loveandroid.Loader.GlideImageLoader;
 import com.lzk.loveandroid.R;
+import com.lzk.loveandroid.Request.IResultCallback;
+import com.lzk.loveandroid.Request.RequestCenter;
 import com.lzk.loveandroid.Utils.LogUtil;
+import com.lzk.loveandroid.Utils.NetworkUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
@@ -20,7 +32,14 @@ import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,7 +58,19 @@ public class HomeFragment extends BaseFragment {
     FrameLayout mPageContentView;
 
     //RecyclerView
-    HomeArticleAdapter mHomeArticleAdapter;
+    private HomeArticleAdapter mHomeArticleAdapter;
+
+    //Banner
+    private Banner mBanner;
+    private List<String> mBannerTitles = new ArrayList<>();//标题
+    private List<String> mBannerImages = new ArrayList<>();//图片
+    private List<String> mBannerUrls = new ArrayList<>();//链接
+
+    private int curPage=0;//当前页数
+    private boolean isRefresh = true;//是否是刷新列表
+
+    private HomeTopArticle homeTopArticle;
+    private HomeArticle homeArticle;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,29 +83,245 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initEventAndData() {
-        OkGo.<String>get("https://www.wanandroid.com/article/list/0/json")
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        String result = response.body();
-                        LogUtil.d(TAG,result);
-                        Gson gson = new Gson();
-                        HomeArticle homeArticle = gson.fromJson(result,HomeArticle.class);
-                        setRecyclerView(homeArticle);
-                    }
-                });
+
+        initRecyclerView();
+
+        if (NetworkUtil.isNetworkConnected()){
+            showLoadingLayout(null);
+            requestHomeBanner();
+
+        }else {
+            showErrorLayout(getResources().getString(R.string.network_error));
+        }
     }
 
-    private void setRecyclerView(HomeArticle  homeArticle){
+    //获取Banner
+    private void requestHomeBanner(){
+        RequestCenter.requestHomeBanner(new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                setBanner((HomeBanner) object);
+                requestHomeTopArticle();
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showErrorLayout(errMsg);
+            }
+
+            @Override
+            public void onError() {
+                showErrorLayout(null);
+            }
+        });
+    }
+
+    //获取首页置顶文章
+    private void requestHomeTopArticle(){
+        RequestCenter.requestHomeTopArticel(new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                homeTopArticle = (HomeTopArticle) object;
+                requestHomeArticle(homeTopArticle,curPage);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showErrorLayout(errMsg);
+            }
+
+            @Override
+            public void onError() {
+                showErrorLayout(null);
+            }
+        });
+    }
+
+    //获取首页文章
+    private void requestHomeArticle(HomeTopArticle homeTopArticle,int page){
+        RequestCenter.requestHomeArticle(page, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                homeArticle = (HomeArticle) object;
+                updateRecyclerView(homeTopArticle , homeArticle);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showErrorLayout(errMsg);
+            }
+
+            @Override
+            public void onError() {
+                showErrorLayout(null);
+            }
+        });
+    }
+
+    /**
+     * 收藏文章
+     * @param id
+     */
+    private void requestCollectArticle(String id,int position){
+        RequestCenter.requestCollectArticle(id, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                HomeArticle homeArticle = (HomeArticle) object;
+                showToastInCenter(homeArticle.getErrorMsg());
+                homeArticle.getData().getDatas().get(position).setCollect(false);
+                mHomeArticleAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /**
+     * 取消收藏
+     * @param id
+     */
+    private void requestUnCollectArticle(String id,int position){
+        RequestCenter.requestUnCollectArticle(id, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                HomeArticle homeArticle = (HomeArticle) object;
+                showToastInCenter(homeArticle.getErrorMsg());
+                homeArticle.getData().getDatas().get(position).setCollect(false);
+                mHomeArticleAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /**
+     * 初始化列表
+     */
+    private void initRecyclerView(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mHomeRv.setLayoutManager(layoutManager);
-        mHomeArticleAdapter = new HomeArticleAdapter(R.layout.layout_home_item,homeArticle.getData().getDatas());
+        mHomeArticleAdapter = new HomeArticleAdapter(R.layout.layout_home_item,null);
+        mHomeArticleAdapter.addHeaderView(initBanner());
         mHomeRv.setAdapter(mHomeArticleAdapter);
+
+        //上拉加载/下拉刷新监听
+        mHomeRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                isRefresh = false;
+                curPage++;
+                requestHomeTopArticle();
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                isRefresh = true;
+                curPage = 0;
+                requestHomeBanner();
+            }
+        });
+
+        //点击事件
+        mHomeArticleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.article_item_collect_iv:
+                        HomeArticle.Datas item = homeArticle.getData().getDatas().get(position);
+                        if (item.isCollect()){
+                            requestUnCollectArticle(item.getId()+"",position);
+                        }else {
+                            requestCollectArticle(item.getId()+"",position);
+                        }
+                        break;
+                }
+            }
+        });
+    }
+
+    private void updateRecyclerView(HomeTopArticle homeTopArticle , HomeArticle homeArticle){
+        if (isRefresh){
+            List<HomeArticle.Datas> datasList = homeTopArticle.getData();
+            if (datasList != null){
+                homeArticle.getData().getDatas().addAll(0,datasList);
+                mHomeArticleAdapter.replaceData(homeArticle.getData().getDatas());
+            }
+            mHomeRefreshLayout.finishRefresh();
+        }else {
+            mHomeArticleAdapter.addData(homeArticle.getData().getDatas());
+            mHomeRefreshLayout.finishLoadMore();
+        }
+        showPageContent();
+    }
+
+    /**
+     * 初始化Banner
+     * @return
+     */
+    private Banner initBanner(){
+        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(MyApplication.getContext()).inflate(R.layout.layout_home_banner,null);
+        mBanner = linearLayout.findViewById(R.id.home_banner);
+        linearLayout.removeView(mBanner);
+        return mBanner;
+    }
+
+    private void setBanner(HomeBanner homeBanner){
+        if (isRefresh){
+            if (homeBanner.getData() == null){
+                return;
+            }
+            mBannerImages.clear();
+            mBannerTitles.clear();
+            mBannerUrls.clear();
+
+            for (HomeBanner.Banner banner : homeBanner.getData()){
+                mBannerImages.add(banner.getImagePath());
+                mBannerUrls.add(banner.getUrl());
+                mBannerTitles.add(banner.getTitle());
+            }
+
+            if (mBanner != null){
+                mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+                mBanner.setImageLoader(new GlideImageLoader());
+                mBanner.setImages(mBannerImages);
+                mBanner.setBannerAnimation(Transformer.DepthPage);
+                mBanner.setBannerTitles(mBannerTitles);
+                mBanner.setDelayTime(3*1000);
+                mBanner.isAutoPlay(true);
+                mBanner.start();
+            }
+        }
     }
 
     @Override
     public void reload() {
+        showLoadingLayout(null);
+        requestHomeBanner();
+    }
 
+    /**
+     * 回到顶部
+     */
+    public void backToTop(){
+        if (mHomeRv != null){
+            mHomeRv.smoothScrollToPosition(0);
+        }
     }
 
 }

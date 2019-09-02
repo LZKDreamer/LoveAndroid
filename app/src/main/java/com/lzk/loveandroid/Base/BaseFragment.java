@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.Base;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.hjq.toast.ToastUtils;
 import com.lzk.loveandroid.R;
 
 import butterknife.ButterKnife;
@@ -111,7 +113,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         }
         hideCurrentView();
         currentState = LOADING_STATE;
-        mLoadingView.setVisibility(View.VISIBLE);
+        if (mLoadingView.getVisibility() == View.GONE){
+            mLoadingView.setVisibility(View.VISIBLE);
+        }
         if (content != null && !content.equals("")){
             mLoadingContentTv.setText(content);
         }else {
@@ -126,7 +130,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         }
         hideCurrentView();
         currentState = EMPTY_STATE;
-        mEmptyView.setVisibility(View.VISIBLE);
+        if (mEmptyView.getVisibility() == View.GONE){
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
         if (content != null && !content.equals("")){
             mEmptyContentTv.setText(content);
         }else {
@@ -141,7 +147,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         }
         hideCurrentView();
         currentState = ERROR_STATE;
-        mErrorView.setVisibility(View.VISIBLE);
+        if (mErrorView.getVisibility() == View.GONE){
+            mErrorView.setVisibility(View.VISIBLE);
+        }
         if (content != null && !content.equals("")){
             mErrorContentTv.setText(content);
         }else {
@@ -156,7 +164,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         }
         hideCurrentView();
         currentState = NORMAL_STATE;
-        mPageContentView.setVisibility(View.VISIBLE);
+        if (mPageContentView.getVisibility() ==View.INVISIBLE){
+            mPageContentView.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -168,16 +178,24 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
                 if (mPageContentView == null) {
                     return;
                 }
-                mPageContentView.setVisibility(View.INVISIBLE);
+                if (mPageContentView.getVisibility() == View.VISIBLE){
+                    mPageContentView.setVisibility(View.INVISIBLE);
+                }
                 break;
             case LOADING_STATE:
-                mLoadingView.setVisibility(View.GONE);
+                if (mLoadingView.getVisibility() == View.VISIBLE){
+                    mLoadingView.setVisibility(View.GONE);
+                }
                 break;
             case ERROR_STATE:
-                mErrorView.setVisibility(View.GONE);
+                if (mErrorView.getVisibility() == View.VISIBLE){
+                    mErrorView.setVisibility(View.GONE);
+                }
                 break;
             case EMPTY_STATE:
-                mEmptyView.setVisibility(View.GONE);
+                if (mEmptyView.getVisibility() == View.VISIBLE){
+                    mEmptyView.setVisibility(View.GONE);
+                }
                 break;
             default:
                 break;
@@ -208,5 +226,10 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
                 reload();
                 break;
         }
+    }
+
+    protected void showToastInCenter(String content){
+        ToastUtils.setGravity(Gravity.CENTER,0,0);
+        ToastUtils.show(content);
     }
 }

@@ -3,6 +3,7 @@ package com.lzk.loveandroid.App;
 import android.app.Application;
 import android.content.Context;
 
+import com.hjq.toast.ToastUtils;
 import com.lzy.okgo.OkGo;
 
 /**
@@ -17,6 +18,7 @@ public class MyApplication extends Application {
         super.onCreate();
         sContext = getApplicationContext();
         OkGo.getInstance().init(this);
+        ToastUtils.init(this);
     }
 
     public static synchronized Context getContext(){

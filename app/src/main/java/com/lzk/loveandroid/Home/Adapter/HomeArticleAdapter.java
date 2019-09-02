@@ -42,6 +42,7 @@ public class HomeArticleAdapter extends BaseQuickAdapter<HomeArticle.Datas,BaseV
         helper.setText(R.id.article_item_chapter_tv,item.getChapterName()+"/"+item.getSuperChapterName());
         //收藏
         helper.getView(R.id.article_item_collect_iv).setSelected(item.isCollect());
+        helper.addOnClickListener(R.id.article_item_collect_iv);
 
     }
 }

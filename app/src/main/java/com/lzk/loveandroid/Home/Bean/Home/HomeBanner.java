@@ -7,16 +7,16 @@ import java.util.List;
  * @date 2019/8/30.
  */
 public class HomeBanner {
-    private List<Banner> banners;
+    private List<Banner> data;
     private int errorCode;
     private String errorMsg;
 
-    public List<Banner> getBanners() {
-        return banners;
+    public List<Banner> getData() {
+        return data;
     }
 
-    public void setBanners(List<Banner> banners) {
-        this.banners = banners;
+    public void setData(List<Banner> data) {
+        this.data = data;
     }
 
     public int getErrorCode() {
@@ -38,6 +38,7 @@ public class HomeBanner {
     public class Banner {
         private String desc;
         private int id;
+        private String imagePath;
         private int isVisible;
         private int order;
         private String title;
@@ -94,6 +95,14 @@ public class HomeBanner {
 
         public String getUrl() {
             return url;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public void setImagePath(String imagePath) {
+            this.imagePath = imagePath;
         }
 
         public void setUrl(String url) {
