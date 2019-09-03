@@ -13,6 +13,9 @@
         android:textSize="@dimen/sp_18"
         android:textColor="@color/colorWhite"
         android:layout_gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:text="标题"
+        android:layout_marginRight="@dimen/dp_10"
         />
 </androidx.appcompat.widget.Toolbar>

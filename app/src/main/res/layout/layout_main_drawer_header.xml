@@ -16,14 +16,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_login_portrait"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center_horizontal"
+            />
         <TextView
             android:id="@+id/header_username_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_20"
             android:textColor="@color/colorWhite"
-            android:text="@string/drawer_header_username"
-            android:layout_marginTop="@dimen/dp_10"/>
+            android:text="@string/login"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </FrameLayout>

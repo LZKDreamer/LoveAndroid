@@ -93,7 +93,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(Object object) {
                 showToastInCenter(getString(R.string.register_success));
-                setResult(LoginActivity.REQUEST_CODE,null);
+                setResult(RESULT_OK,null);
                 SPUtil.getInstance().putBoolean(AppConstant.USER_LOGIN_STATUS,true);
                 SPUtil.getInstance().putString(AppConstant.USERNAME,username);
                 SPUtil.getInstance().putString(AppConstant.PASSWORD,password);

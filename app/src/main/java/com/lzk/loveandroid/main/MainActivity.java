@@ -289,7 +289,7 @@ public class MainActivity extends BaseActivity {
                 mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(true);
                 break;
             case EventConstant.TYPE_LOGOUT:
-                mUsernameTv.setText(getString(R.string.username));
+                mUsernameTv.setText(getString(R.string.login));
                 mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(false);
                 SPUtil.getInstance().remove(AppConstant.USERNAME);
                 SPUtil.getInstance().remove(AppConstant.PASSWORD);

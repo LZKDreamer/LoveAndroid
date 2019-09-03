@@ -7,6 +7,8 @@ import com.hjq.toast.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.SPCookieStore;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import okhttp3.OkHttpClient;
 
@@ -26,6 +28,7 @@ public class MyApplication extends Application {
         builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));
         OkGo.getInstance().setOkHttpClient(builder.build()).init(this);
         ToastUtils.init(this);
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static synchronized Context getContext(){

@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_register_btn)
     Button mLoginRegisterBtn;
 
-    public static final int REQUEST_CODE=1;
+    public static final int REQUEST_CODE=101;
 
     @Override
     public int getLayoutId() {
@@ -59,7 +59,6 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.colorWhite));
-        StatusBarUtil.setTransparent(this);
     }
 
     @OnClick({R.id.login_back_iv, R.id.login_login_btn, R.id.login_register_btn})
@@ -93,7 +92,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             finish();
         }
     }

@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.Home.Fragment;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,12 +26,14 @@ import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
 import com.lzk.loveandroid.Utils.LogUtil;
 import com.lzk.loveandroid.Utils.NetworkUtil;
+import com.lzk.loveandroid.main.ArticleDetailActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -167,8 +170,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onSuccess(Object object) {
                 showToastInCenter(getString(R.string.collect_success));
-                homeArticle.getData().getDatas().get(position).setCollect(false);
-                mHomeArticleAdapter.notifyItemChanged(position);
+                homeArticle.getData().getDatas().get(position).setCollect(true);
+                mHomeArticleAdapter.notifyItemChanged(position+1);
             }
 
             @Override
@@ -193,7 +196,7 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Object object) {
                 showToastInCenter(getString(R.string.uncollect_success));
                 homeArticle.getData().getDatas().get(position).setCollect(false);
-                mHomeArticleAdapter.notifyItemChanged(position);
+                mHomeArticleAdapter.notifyItemChanged(position+1);
             }
 
             @Override
@@ -250,6 +253,15 @@ public class HomeFragment extends BaseFragment {
                         }
                         break;
                 }
+            }
+        });
+
+        mHomeArticleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = ArticleDetailActivity.newIntent(getActivity(),homeArticle.getData().getDatas().get(position).getTitle(),
+                        homeArticle.getData().getDatas().get(position).getLink());
+                startActivity(intent);
             }
         });
     }

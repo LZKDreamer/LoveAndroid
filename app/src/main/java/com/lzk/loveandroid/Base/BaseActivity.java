@@ -146,7 +146,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 隐藏当前显示的View
      */
-    private void hideCurrentView() {
+    public void hideCurrentView() {
         switch (currentState) {
             case NORMAL_STATE:
                 if (mPageContentView == null) {

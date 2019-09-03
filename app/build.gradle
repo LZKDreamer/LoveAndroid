@@ -49,4 +49,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.hjq:toast:8.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    api 'com.just.agentweb:agentweb:4.1.2'
 }
