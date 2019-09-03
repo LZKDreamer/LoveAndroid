@@ -166,8 +166,7 @@ public class HomeFragment extends BaseFragment {
         RequestCenter.requestCollectArticle(id, new IResultCallback() {
             @Override
             public void onSuccess(Object object) {
-                HomeArticle homeArticle = (HomeArticle) object;
-                showToastInCenter(homeArticle.getErrorMsg());
+                showToastInCenter(getString(R.string.collect_success));
                 homeArticle.getData().getDatas().get(position).setCollect(false);
                 mHomeArticleAdapter.notifyItemChanged(position);
             }
@@ -192,8 +191,7 @@ public class HomeFragment extends BaseFragment {
         RequestCenter.requestUnCollectArticle(id, new IResultCallback() {
             @Override
             public void onSuccess(Object object) {
-                HomeArticle homeArticle = (HomeArticle) object;
-                showToastInCenter(homeArticle.getErrorMsg());
+                showToastInCenter(getString(R.string.uncollect_success));
                 homeArticle.getData().getDatas().get(position).setCollect(false);
                 mHomeArticleAdapter.notifyItemChanged(position);
             }
@@ -218,6 +216,7 @@ public class HomeFragment extends BaseFragment {
         mHomeRv.setLayoutManager(layoutManager);
         mHomeArticleAdapter = new HomeArticleAdapter(R.layout.layout_home_item,null);
         mHomeArticleAdapter.addHeaderView(initBanner());
+        mHomeArticleAdapter.openLoadAnimation();
         mHomeRv.setAdapter(mHomeArticleAdapter);
 
         //上拉加载/下拉刷新监听

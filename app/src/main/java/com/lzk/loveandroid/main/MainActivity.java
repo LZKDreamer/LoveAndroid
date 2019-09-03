@@ -1,8 +1,10 @@
 package com.lzk.loveandroid.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -19,12 +21,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.jaeger.library.StatusBarUtil;
+import com.lzk.loveandroid.App.AppConstant;
 import com.lzk.loveandroid.Base.BaseActivity;
+import com.lzk.loveandroid.CustomView.CommonDialog;
+import com.lzk.loveandroid.EventBus.Event;
+import com.lzk.loveandroid.EventBus.EventConstant;
+import com.lzk.loveandroid.EventBus.EventUtil;
 import com.lzk.loveandroid.Home.Fragment.HomeFragment;
 import com.lzk.loveandroid.Knowledge.Fragment.KnowledgeFragment;
+import com.lzk.loveandroid.Login.LoginActivity;
 import com.lzk.loveandroid.Navigation.Fragment.NavFragment;
 import com.lzk.loveandroid.Project.Fragment.ProjectFragment;
 import com.lzk.loveandroid.R;
+import com.lzk.loveandroid.Request.IResultCallback;
+import com.lzk.loveandroid.Request.RequestCenter;
+import com.lzk.loveandroid.Utils.SPUtil;
 import com.lzk.loveandroid.wx.Fragment.WXFragment;
 
 import butterknife.BindView;
@@ -48,6 +59,7 @@ public class MainActivity extends BaseActivity {
     NavigationView mMainNavView;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mMainDrawerLayout;
+    private TextView mUsernameTv;
 
     //Fragment
     private HomeFragment mHomeFragment;
@@ -78,25 +90,49 @@ public class MainActivity extends BaseActivity {
         setDefaultFragment();
 
         //DrawerNav
+        mUsernameTv = mMainNavView.getHeaderView(0).findViewById(R.id.header_username_tv);
+        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(true);
+            mUsernameTv.setText(SPUtil.getInstance().getString(AppConstant.USERNAME,""));
+        }else {
+            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(false);
+        }
         mMainBottomNavView.setSelectedItemId(R.id.tab_home);
         mMainNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.header_favorite://收藏
-
+                        //mMainDrawerLayout.closeDrawers();
                         break;
                     case R.id.header_setting://设置
-
+                        //mMainDrawerLayout.closeDrawers();
                         break;
                     case R.id.header_about_us://关于我们
-
+                        //mMainDrawerLayout.closeDrawers();
                         break;
-                    case R.id.header_username_tv://用户名
-
+                    case R.id.header_logout:
+                        CommonDialog dialog = new CommonDialog(MainActivity.this, getString(R.string.prompt)
+                                , getString(R.string.is_logout), getString(R.string.sure_logout), getString(R.string.cancel),
+                                new CommonDialog.DialogClickListener() {
+                                    @Override
+                                    public void onDialogClick() {
+                                        logout();
+                                    }
+                                });
+                        dialog.show();
                         break;
                 }
                 return true;
+            }
+        });
+        mUsernameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+                    Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(login);
+                }
             }
         });
 
@@ -237,5 +273,52 @@ public class MainActivity extends BaseActivity {
         }
 
 
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveEvent(Event event) {
+        switch (event.getType()){
+            case EventConstant.TYPE_REGISTER:
+            case EventConstant.TYPE_LOGIN:
+                mUsernameTv.setText((String)event.getData());
+                mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(true);
+                break;
+            case EventConstant.TYPE_LOGOUT:
+                mUsernameTv.setText(getString(R.string.username));
+                mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(false);
+                SPUtil.getInstance().remove(AppConstant.USERNAME);
+                SPUtil.getInstance().remove(AppConstant.PASSWORD);
+                SPUtil.getInstance().putBoolean(AppConstant.USER_LOGIN_STATUS,false);
+                break;
+
+        }
+
+    }
+
+    /**
+     * 退出登录
+     */
+    private void logout(){
+        RequestCenter.requestLogout(new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                EventUtil.sendEvent(new Event(EventConstant.TYPE_LOGOUT));
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 }

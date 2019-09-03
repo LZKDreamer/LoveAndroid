@@ -24,9 +24,30 @@
     <string name="drawer_nav_setting">设置</string>
     <string name="drawer_nav_about_us">关于我们</string>
     <string name="drawer_header_username">用户名</string>
+    <string name="drawer_nav_logout">退出登录</string>
 
     //首页文章
     <string name="article_top">置顶</string>
+    <string name="collect_success">收藏成功</string>
+    <string name="uncollect_success">取消收藏</string>
+
+    //登录注册
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="username_or_psw_not_empty">用户名或密码不能为空</string>
+    <string name="password_repeat_incorrect">两次密码不一致</string>
+    <string name="repeat_psw">请重复密码</string>
+    <string name="or">或</string>
+    <string name="email">邮箱</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
+    <string name="prompt">提示</string>
+    <string name="is_logout">是否退出登录</string>
+    <string name="sure_logout">退出</string>
+    <string name="cancel">取消</string>
+    <string name="email_psw_not_empty">邮箱或密码不能为空</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

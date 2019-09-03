@@ -3,12 +3,20 @@ package com.lzk.loveandroid.Base;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hjq.toast.ToastUtils;
+import com.lzk.loveandroid.EventBus.Event;
+import com.lzk.loveandroid.EventBus.EventUtil;
 import com.lzk.loveandroid.R;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author LiaoZhongKai
@@ -73,6 +81,18 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             mEmptyView.setVisibility(View.GONE);
             mPageContentView.setVisibility(View.VISIBLE);
         }
+
+        if (isRegisterEventBus()) {
+            EventUtil.register(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isRegisterEventBus()) {
+            EventUtil.unregister(this);
+        }
     }
 
     /**
@@ -85,6 +105,33 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * 重新加载
      */
     public abstract void reload();
+
+    /**
+     * 是否注册事件分发
+     *
+     * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
+     */
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBusReceive(Event event) {
+        if (event != null) {
+            receiveEvent(event);
+        }
+    }
+
+    /**
+     * 接收到分发到事件
+     *
+     * @param event 事件
+     */
+    protected void receiveEvent(Event event) {
+
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -175,5 +222,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         hideCurrentView();
         currentState = NORMAL_STATE;
         mPageContentView.setVisibility(View.VISIBLE);
+    }
+
+    protected void showToastInCenter(String content){
+        ToastUtils.setGravity(Gravity.CENTER,0,0);
+        ToastUtils.show(content);
     }
 }

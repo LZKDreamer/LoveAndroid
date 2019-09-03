@@ -10,4 +10,11 @@
     <color name="color_article_tag">#D81B60</color>
     <color name="color_article_author">#808080</color>
     <color name="color_article_time">#D3D3D3</color>
+    <color name="color_divider">#A9A9A9</color>
+    <color name="color_login_btn">#D81B60</color>
+    <color name="color_register_btn">#3CB371</color>
+    <color name="color_dialog_title">#000000</color>
+    <color name="color_dialog_content">#A9A9A9</color>
+    <color name="color_dialog_cancel">#A9A9A9</color>
+    <color name="color_dialog_confirm">#3CB371</color>
 </resources>

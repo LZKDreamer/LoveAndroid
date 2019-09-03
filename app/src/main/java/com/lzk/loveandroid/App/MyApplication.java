@@ -5,6 +5,10 @@ import android.content.Context;
 
 import com.hjq.toast.ToastUtils;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cookie.CookieJarImpl;
+import com.lzy.okgo.cookie.store.SPCookieStore;
+
+import okhttp3.OkHttpClient;
 
 /**
  * @author LiaoZhongKai
@@ -17,7 +21,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
-        OkGo.getInstance().init(this);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        //使用sp保持cookie，如果cookie不过期，则一直有效
+        builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));
+        OkGo.getInstance().setOkHttpClient(builder.build()).init(this);
         ToastUtils.init(this);
     }
 
