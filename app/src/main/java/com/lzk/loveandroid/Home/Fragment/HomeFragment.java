@@ -41,6 +41,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -289,6 +290,16 @@ public class HomeFragment extends BaseFragment {
         LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(MyApplication.getContext()).inflate(R.layout.layout_home_banner,null);
         mBanner = linearLayout.findViewById(R.id.home_banner);
         linearLayout.removeView(mBanner);
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (mBannerUrls != null && mBannerUrls.size()>position){
+                    Intent intent = ArticleDetailActivity.newIntent(getActivity(),mBannerTitles.get(position),
+                            mBannerUrls.get(position));
+                    startActivity(intent);
+                }
+            }
+        });
         return mBanner;
     }
 
