@@ -50,4 +50,5 @@ dependencies {
     implementation 'com.hjq:toast:8.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     api 'com.just.agentweb:agentweb:4.1.2'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
 }

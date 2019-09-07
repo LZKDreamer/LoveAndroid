@@ -97,8 +97,10 @@ public class ArticleDetailActivity extends BaseActivity {
 
     @Override
     public void reload() {
-        showPageContent();
-        loadWeb(url);
+        if (NetworkUtil.isNetworkConnected()){
+            showPageContent();
+            loadWeb(url);
+        }
     }
 
     @Override

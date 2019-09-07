@@ -1,6 +1,11 @@
 package com.lzk.loveandroid.Utils;
 
 import android.content.Context;
+import android.view.View;
+
+import com.lzk.loveandroid.App.AppConstant;
+
+import java.util.Random;
 
 /**
  * @author LiaoZhongKai
@@ -15,5 +20,18 @@ public class CommonUtil {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale);
+    }
+
+    /**
+     * 获取标签随机背景色
+     * @return
+     */
+    public static int getFlowTagBackgroudColor(){
+        int randomNum = new Random().nextInt();
+        int position = randomNum % AppConstant.TAG_COLORS.length;
+        if (position < 0) {
+            position = -position;
+        }
+        return AppConstant.TAG_COLORS[position];
     }
 }

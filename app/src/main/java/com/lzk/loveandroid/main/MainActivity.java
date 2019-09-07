@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.jaeger.library.StatusBarUtil;
 import com.lzk.loveandroid.App.AppConstant;
 import com.lzk.loveandroid.Base.BaseActivity;
+import com.lzk.loveandroid.CommonWeb.Activity.CommonWebActivity;
 import com.lzk.loveandroid.CustomView.CommonDialog;
 import com.lzk.loveandroid.EventBus.Event;
 import com.lzk.loveandroid.EventBus.EventConstant;
@@ -224,7 +225,8 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.toolbar_website://常用网站
-
+                    Intent webIntent = new Intent(this, CommonWebActivity.class);
+                    startActivity(webIntent);
                 break;
             case R.id.toolbar_search://搜索
 

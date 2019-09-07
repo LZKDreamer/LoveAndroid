@@ -17,4 +17,9 @@
     <color name="color_dialog_content">#A9A9A9</color>
     <color name="color_dialog_cancel">#A9A9A9</color>
     <color name="color_dialog_confirm">#3CB371</color>
+    <color name="color_tag_one">#00ffd3</color>
+    <color name="color_tag_two">#00a0ff</color>
+    <color name="color_tag_three">#00ff8e</color>
+    <color name="color_tag_four">#00f4ff</color>
+    <color name="color_tag_five">#ffc900</color>
 </resources>

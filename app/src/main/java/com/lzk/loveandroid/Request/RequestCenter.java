@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.Request;
 
 import com.google.gson.Gson;
+import com.lzk.loveandroid.CommonWeb.Bean.CommonWebBean;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
 import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
@@ -238,6 +239,33 @@ public class RequestCenter {
                             callback.onSuccess(homeArticle);
                         }else {
                             callback.onFailure(homeArticle.getErrorCode(),homeArticle.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 常用网站
+     */
+    public static void requestCommonWeb(IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/friend/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        CommonWebBean commonWebBean = gson.fromJson(response.body(),CommonWebBean.class);
+                        if (commonWebBean.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(commonWebBean);
+                        }else {
+                            callback.onFailure(commonWebBean.getErrorCode(),commonWebBean.getErrorMsg());
                         }
                     }
 

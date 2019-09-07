@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".main.ArticleDetailActivity"></activity>
+        <activity android:name=".CommonWeb.Activity.CommonWebActivity"></activity>
+        <activity android:name=".main.ArticleDetailActivity" />
         <activity android:name=".Register.RegisterActivity" />
         <activity android:name=".Login.LoginActivity" />
 
