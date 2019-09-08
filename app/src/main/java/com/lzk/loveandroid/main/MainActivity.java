@@ -36,6 +36,8 @@ import com.lzk.loveandroid.Project.Fragment.ProjectFragment;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
+import com.lzk.loveandroid.Search.SearchActivity;
+import com.lzk.loveandroid.Search.SearchHistoryAdapter;
 import com.lzk.loveandroid.Utils.SPUtil;
 import com.lzk.loveandroid.wx.Fragment.WXFragment;
 
@@ -229,6 +231,8 @@ public class MainActivity extends BaseActivity {
                     startActivity(webIntent);
                 break;
             case R.id.toolbar_search://搜索
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
 
                 break;
         }

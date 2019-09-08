@@ -104,16 +104,17 @@ public class CommonWebActivity extends BaseActivity {
                 TextView mTagTv = (TextView) LayoutInflater.from(MyApplication.getContext()).inflate(R.layout.layout_flow_tag,parent,false);
                 mTagTv.setText(dataBean.getName());
                 mTagTv.setBackgroundColor(CommonUtil.getFlowTagBackgroudColor());
-                commonWebFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-                    @Override
-                    public boolean onTagClick(View view, int position, FlowLayout parent) {
-                        Intent intent = ArticleDetailActivity.newIntent(CommonWebActivity.this,
-                                mCommonWebBean.getData().get(position).getName(),mCommonWebBean.getData().get(position).getLink());
-                        startActivity(intent);
-                        return true;
-                    }
-                });
                 return mTagTv;
+            }
+        });
+
+        commonWebFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                Intent intent = ArticleDetailActivity.newIntent(CommonWebActivity.this,
+                        mCommonWebBean.getData().get(position).getName(),mCommonWebBean.getData().get(position).getLink());
+                startActivity(intent);
+                return true;
             }
         });
     }

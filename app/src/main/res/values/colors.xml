@@ -22,4 +22,8 @@
     <color name="color_tag_three">#00ff8e</color>
     <color name="color_tag_four">#00f4ff</color>
     <color name="color_tag_five">#ffc900</color>
+    <color name="color_search_btn">#ee3400</color>
+    <color name="color_search_hint">#d8ecef</color>
+    <color name="color_hot_search">#ff3000</color>
+    <color name="color_search_common">#00ddff</color>
 </resources>

@@ -1,10 +1,13 @@
 package com.lzk.loveandroid.Request;
 
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.Gson;
 import com.lzk.loveandroid.CommonWeb.Bean.CommonWebBean;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
 import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
+import com.lzk.loveandroid.Search.SearchHotkey;
 import com.lzk.loveandroid.Utils.LogUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
@@ -278,5 +281,33 @@ public class RequestCenter {
                         }
                     }
                 });
+    }
+
+    /**
+     * 热门搜索
+     */
+    public static void requestSearchHotKey(IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com//hotkey/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        SearchHotkey searchHotkey = gson.fromJson(response.body(),SearchHotkey.class);
+                        if (searchHotkey.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(searchHotkey);
+                        }else {
+                            callback.onFailure(searchHotkey.getErrorCode(),searchHotkey.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+
     }
 }

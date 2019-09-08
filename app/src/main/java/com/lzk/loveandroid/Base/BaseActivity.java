@@ -104,7 +104,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 重新加载
      */
-    public abstract void reload();
+    public void reload(){}
 
     /**
      * 是否注册事件分发

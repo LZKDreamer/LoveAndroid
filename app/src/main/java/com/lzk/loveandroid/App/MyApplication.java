@@ -10,6 +10,8 @@ import com.lzy.okgo.cookie.store.SPCookieStore;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
+import org.litepal.LitePal;
+
 import okhttp3.OkHttpClient;
 
 /**
@@ -29,6 +31,7 @@ public class MyApplication extends Application {
         OkGo.getInstance().setOkHttpClient(builder.build()).init(this);
         ToastUtils.init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
+        LitePal.initialize(this);
     }
 
     public static synchronized Context getContext(){

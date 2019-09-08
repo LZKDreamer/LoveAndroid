@@ -48,6 +48,15 @@
     <string name="sure_logout">退出</string>
     <string name="cancel">取消</string>
     <string name="email_psw_not_empty">邮箱或密码不能为空</string>
+    
+    //搜索
+    <string name="search_history">搜索历史</string>
+    <string name="clear_search_history">清空</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="search_hint">发现更多干货</string>
+    <string name="search_history_empty_hint">快来搜点干货吧 (*^__^*)</string>
+    
+    
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
