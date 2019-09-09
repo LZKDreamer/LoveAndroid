@@ -1,5 +1,7 @@
 package com.lzk.loveandroid.Request;
 
+import android.util.Log;
+
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
@@ -309,5 +311,30 @@ public class RequestCenter {
                     }
                 });
 
+    }
+
+    /**
+     * 搜索文章
+     * @param page 页数
+     * @param keyword 关键词
+     * @param callback
+     */
+    public static void requestSearchArticle(int page,String keyword,IResultCallback callback){
+        OkGo.<String>post("https://www.wanandroid.com/article/query/"+page+"/json")
+                .params("k",keyword)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
     }
 }

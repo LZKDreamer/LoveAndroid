@@ -1,5 +1,6 @@
 package com.lzk.loveandroid.Search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -128,7 +129,8 @@ public class SearchActivity extends BaseActivity {
      * @param keyword
      */
     private void startSearchResultActivity(String keyword){
-        finish();
+        Intent intent = SearchListActivity.newIntent(this,keyword);
+        startActivity(intent);
     }
 
     /**

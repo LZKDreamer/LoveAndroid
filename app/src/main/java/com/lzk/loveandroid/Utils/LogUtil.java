@@ -21,4 +21,8 @@ public class LogUtil {
             Logger.t(tag).e(msg);
         }
     }
+
+    public static void json(String json){
+        Logger.json(json);
+    }
 }
