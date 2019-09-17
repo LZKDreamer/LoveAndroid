@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -75,6 +77,7 @@ public class SearchActivity extends BaseActivity {
         StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryToolbar));
         loadHotKey();
         loadHistoryData();
+        initEditTextSearchEvent();
     }
 
     @Override
@@ -102,6 +105,24 @@ public class SearchActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    /**
+     * 软键盘搜索按钮
+     */
+    private void initEditTextSearchEvent(){
+        searchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    if (!TextUtils.isEmpty(searchEt.getText().toString().trim())){
+                        startSearchResultActivity(searchEt.getText().toString().trim());
+                    }
+                }
+
+                return true;
+            }
+        });
     }
 
     /**

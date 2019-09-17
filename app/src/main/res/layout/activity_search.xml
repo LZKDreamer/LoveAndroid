@@ -35,6 +35,9 @@
             android:gravity="center_vertical"
             android:textColorHint="@color/color_search_hint"
             android:textSize="@dimen/sp_16"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:inputType="text"
             />
         <Button
             android:id="@+id/search_btn"

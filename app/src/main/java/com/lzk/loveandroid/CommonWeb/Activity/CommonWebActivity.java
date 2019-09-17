@@ -3,6 +3,7 @@ package com.lzk.loveandroid.CommonWeb.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -59,6 +60,16 @@ public class CommonWebActivity extends BaseActivity {
         }else {
             showErrorLayout(getString(R.string.network_error));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     @Override
