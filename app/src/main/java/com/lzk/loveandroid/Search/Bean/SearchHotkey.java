@@ -1,4 +1,4 @@
-package com.lzk.loveandroid.Search;
+package com.lzk.loveandroid.Search.Bean;
 
 import java.util.List;
 

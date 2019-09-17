@@ -18,5 +18,6 @@ public class SearchHistoryAdapter extends BaseQuickAdapter<SearchHistoryBean, Ba
     @Override
     protected void convert(@NonNull BaseViewHolder helper, SearchHistoryBean item) {
         helper.setText(R.id.search_history_item_tv,item.getKeyWord());
+        helper.addOnClickListener(R.id.search_history_item_tv);
     }
 }

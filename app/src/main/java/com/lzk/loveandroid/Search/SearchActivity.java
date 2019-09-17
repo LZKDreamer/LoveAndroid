@@ -1,11 +1,11 @@
 package com.lzk.loveandroid.Search;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,13 +25,15 @@ import com.lzk.loveandroid.DB.Search.SearchHistoryBean;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
-import com.lzk.loveandroid.Utils.LogUtil;
+import com.lzk.loveandroid.Search.Bean.SearchHotkey;
+import com.lzk.loveandroid.main.ArticleDetailActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import org.litepal.LitePal;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,9 +65,12 @@ public class SearchActivity extends BaseActivity {
 
     private List<SearchHistoryBean> mHistoryBeanList;
 
+    private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         ButterKnife.bind(this);
         StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryToolbar));
         loadHotKey();
@@ -86,7 +91,6 @@ public class SearchActivity extends BaseActivity {
             case R.id.search_btn:
                 String key = searchEt.getText().toString().trim();
                 if (!TextUtils.isEmpty(key)){
-                    saveSearchHistory(key);
                     startSearchResultActivity(key);
                 }
                 break;
@@ -104,7 +108,7 @@ public class SearchActivity extends BaseActivity {
      * 查询搜索历史
      */
     private void loadHistoryData(){
-        mHistoryBeanList = LitePal.findAll(SearchHistoryBean.class);
+        mHistoryBeanList = LitePal.order("updateDate desc").find(SearchHistoryBean.class);
         if (mHistoryBeanList == null || mHistoryBeanList.size() == 0){
             searchHistoryRv.setVisibility(View.GONE);
             mSearchEmptyHintTv.setVisibility(View.VISIBLE);
@@ -131,6 +135,8 @@ public class SearchActivity extends BaseActivity {
     private void startSearchResultActivity(String keyword){
         Intent intent = SearchListActivity.newIntent(this,keyword);
         startActivity(intent);
+        saveSearchHistory(keyword);
+        finish();
     }
 
     /**
@@ -173,6 +179,7 @@ public class SearchActivity extends BaseActivity {
         searchHotFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
+                startSearchResultActivity(mSearchHotkey.getData().get(position).getName());
                 return true;
             }
         });
@@ -183,8 +190,21 @@ public class SearchActivity extends BaseActivity {
      * @param key
      */
     private void saveSearchHistory(String key){
-        SearchHistoryBean bean = new SearchHistoryBean();
-        bean.setKeyWord(key);
-        bean.save();
+        List<SearchHistoryBean> list = LitePal.where("keyWord=?",key).find(SearchHistoryBean.class);
+        if (list != null && list.size()>0){
+            for (SearchHistoryBean bean : list){
+                if (bean.getKeyWord().equals(key)){
+                    bean.setKeyWord(key);
+                    bean.setUpdateDate(new Date());
+                    bean.save();
+                    break;
+                }
+            }
+        }else {
+            SearchHistoryBean bean = new SearchHistoryBean();
+            bean.setKeyWord(key);
+            bean.setUpdateDate(new Date());
+            bean.save();
+        }
     }
 }

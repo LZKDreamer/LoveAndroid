@@ -5,20 +5,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jaeger.library.StatusBarUtil;
 import com.lzk.loveandroid.Base.BaseActivity;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
+import com.lzk.loveandroid.Search.Bean.SearchResult;
 import com.lzk.loveandroid.Utils.NetworkUtil;
+import com.lzk.loveandroid.main.ArticleDetailActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +49,11 @@ public class SearchListActivity extends BaseActivity {
     FloatingActionButton searchListFloatBtn;
 
     private String keyword;
+    private int curPage;//当前页数
+    private boolean isRefresh = true;
+    private SearchListAdapter mAdapter;
+    private Context mContext;
+    private SearchResult mSearchResult;
 
     private static final String INTENT_KEYWORD = "intent_keyword";
 
@@ -51,6 +67,8 @@ public class SearchListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mContext = this;
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryToolbar));
         //ActionBar
         setSupportActionBar(commonToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -67,11 +85,13 @@ public class SearchListActivity extends BaseActivity {
             commonToolbarTitleTv.setText(keyword);
             if (NetworkUtil.isNetworkConnected()){
                 showLoadingLayout(null);
-                requestSearchArticle(0,keyword);
+                requestSearchArticle(curPage,keyword);
             }else {
                 showErrorLayout(getString(R.string.network_error));
             }
         }
+
+        initRecyclerView();
     }
 
     @Override
@@ -93,12 +113,79 @@ public class SearchListActivity extends BaseActivity {
     public void reload() {
         if (NetworkUtil.isNetworkConnected()){
             showLoadingLayout(null);
+            requestSearchArticle(curPage,keyword);
         }
     }
 
     @OnClick(R.id.search_list_float_btn)
     public void onViewClicked() {
         searchListRv.smoothScrollToPosition(0);
+    }
+
+    /**
+     * 初始化RecyclerView
+     */
+    private void initRecyclerView(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mAdapter = new SearchListAdapter(R.layout.layout_article_item,null);
+        mAdapter.openLoadAnimation();
+        searchListRv.setLayoutManager(layoutManager);
+        searchListRv.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = ArticleDetailActivity.newIntent(mContext,mSearchResult.getData().getDatas().get(position).getTitle(),mSearchResult.getData().getDatas().get(position).getLink());
+                startActivity(intent);
+            }
+        });
+
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.article_item_collect_iv:
+                        SearchResult.DataBean.DatasBean datasBean = mSearchResult.getData().getDatas().get(position);
+                        if (datasBean.isCollect()){
+                            requestUnCollectArticle(datasBean.getId()+"",position);
+                        }else {
+                            requestCollectArticle(datasBean.getId()+"",position);
+                        }
+                        break;
+                }
+            }
+        });
+
+        searchListRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                isRefresh = false;
+                curPage++;
+                requestSearchArticle(curPage,keyword);
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                isRefresh = true;
+                curPage = 0;
+                requestSearchArticle(curPage,keyword);
+            }
+        });
+    }
+
+    /**
+     * 更新RecyclerView
+     * @param searchResult
+     */
+    private void updateRecyclerView(SearchResult searchResult){
+        if (isRefresh){
+            mAdapter.replaceData(searchResult.getData().getDatas());
+            searchListRefreshLayout.finishRefresh();
+        }else {
+            mAdapter.addData(searchResult.getData().getDatas());
+            searchListRefreshLayout.finishLoadMore();
+        }
+        showPageContent();
     }
 
     /**
@@ -110,12 +197,69 @@ public class SearchListActivity extends BaseActivity {
         RequestCenter.requestSearchArticle(page, keyword, new IResultCallback() {
             @Override
             public void onSuccess(Object object) {
-
+                if (isRefresh){
+                    mSearchResult = (SearchResult) object;
+                }else {
+                    mSearchResult.getData().getDatas().addAll(((SearchResult) object).getData().getDatas());
+                }
+                updateRecyclerView((SearchResult) object);
             }
 
             @Override
             public void onFailure(int errCode, String errMsg) {
+                showErrorLayout(errMsg);
+            }
 
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /**
+     * 收藏文章
+     * @param articleId
+     * @param position
+     */
+    private void requestCollectArticle(String articleId,int position){
+        RequestCenter.requestCollectArticle(articleId, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                showToastInCenter(getString(R.string.collect_success));
+                mSearchResult.getData().getDatas().get(position).setCollect(true);
+                mAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /**
+     * 取消收藏文章
+     * @param articleId
+     * @param position
+     */
+    private void requestUnCollectArticle(String articleId,int position){
+        RequestCenter.requestUnCollectArticle(articleId, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                showToastInCenter(getString(R.string.uncollect_success));
+                mSearchResult.getData().getDatas().get(position).setCollect(false);
+                mAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
             }
 
             @Override

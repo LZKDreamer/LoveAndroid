@@ -1,22 +1,16 @@
 package com.lzk.loveandroid.Request;
 
-import android.util.Log;
-
-import androidx.core.content.ContextCompat;
-
 import com.google.gson.Gson;
 import com.lzk.loveandroid.CommonWeb.Bean.CommonWebBean;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
 import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
-import com.lzk.loveandroid.Search.SearchHotkey;
+import com.lzk.loveandroid.Search.Bean.SearchResult;
+import com.lzk.loveandroid.Search.Bean.SearchHotkey;
 import com.lzk.loveandroid.Utils.LogUtil;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
 
 /**
  * @author LiaoZhongKai
@@ -325,6 +319,12 @@ public class RequestCenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        SearchResult searchResult = gson.fromJson(response.body(),SearchResult.class);
+                        if (searchResult.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(searchResult);
+                        }else {
+                            callback.onFailure(searchResult.getErrorCode(),searchResult.getErrorMsg());
+                        }
                     }
 
                     @Override

@@ -146,7 +146,11 @@ public class HomeFragment extends BaseFragment {
         RequestCenter.requestHomeArticle(page, new IResultCallback() {
             @Override
             public void onSuccess(Object object) {
-                homeArticle = (HomeArticle) object;
+                if (isRefresh){
+                    homeArticle = (HomeArticle) object;
+                }else {
+                    homeArticle.getData().getDatas().addAll(((HomeArticle) object).getData().getDatas());
+                }
                 updateRecyclerView(homeTopArticle , homeArticle);
             }
 
