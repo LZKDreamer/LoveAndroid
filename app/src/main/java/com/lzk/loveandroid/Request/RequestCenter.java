@@ -5,6 +5,8 @@ import com.lzk.loveandroid.CommonWeb.Bean.CommonWebBean;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
 import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
+import com.lzk.loveandroid.Knowledge.Bean.KnowledgeBean;
+import com.lzk.loveandroid.Knowledge.Bean.KnowledgeItem;
 import com.lzk.loveandroid.Search.Bean.SearchResult;
 import com.lzk.loveandroid.Search.Bean.SearchHotkey;
 import com.lzk.loveandroid.Utils.LogUtil;
@@ -324,6 +326,62 @@ public class RequestCenter {
                             callback.onSuccess(searchResult);
                         }else {
                             callback.onFailure(searchResult.getErrorCode(),searchResult.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     *知识体系
+     */
+    public static void requestKnowledgeSystem(IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/tree/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        KnowledgeBean knowledgeBean = gson.fromJson(response.body(),KnowledgeBean.class);
+                        if (knowledgeBean.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(knowledgeBean);
+                        }else {
+                            callback.onFailure(knowledgeBean.getErrorCode(),knowledgeBean.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 知识体系下的文章
+     * @param id
+     * @param page
+     */
+    public static void requestKnowldgeItem(int id,int page,IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/article/list/"+page+"/json?cid="+id)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        KnowledgeItem knowledgeItem = gson.fromJson(response.body(),KnowledgeItem.class);
+                        if (knowledgeItem.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(knowledgeItem);
+                        }else {
+                            callback.onFailure(knowledgeItem.getErrorCode(),knowledgeItem.getErrorMsg());
                         }
                     }
 

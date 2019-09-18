@@ -277,6 +277,11 @@ public class MainActivity extends BaseActivity {
                 return;
             }
         }
+        if (mKnowledgeFragment != null){
+            if (mKnowledgeFragment.isVisible()){
+                mKnowledgeFragment.backToTop();
+            }
+        }
 
 
     }

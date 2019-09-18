@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Knowledge.Activity.KnowledgeListActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/layout_common_toolbar"
+            app:layout_behavior="@string/bye_burger_title_behavior"/>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/knowledge_list_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="scrollable"
+            app:tabGravity="fill"
+            >
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/knowledge_list_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        </androidx.viewpager.widget.ViewPager>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/knowledge_list_float_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back_top"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="right|bottom"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="70dp"
+        app:layout_behavior="@string/bye_burger_float_behavior"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

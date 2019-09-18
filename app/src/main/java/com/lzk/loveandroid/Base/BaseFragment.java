@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.hjq.toast.ToastUtils;
 import com.lzk.loveandroid.R;
+import com.lzk.loveandroid.Utils.LogUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -165,6 +166,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         hideCurrentView();
         currentState = NORMAL_STATE;
         if (mPageContentView.getVisibility() ==View.INVISIBLE){
+            LogUtil.d("visible");
             mPageContentView.setVisibility(View.VISIBLE);
         }
     }
@@ -216,7 +218,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
     /**
      * 重新加载
      */
-    public abstract void reload();
+    public void reload(){};
 
     @Override
     public void onClick(View v) {
