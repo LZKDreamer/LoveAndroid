@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author LiaoZhongKai
  * @date 2019/9/18.
  */
-public class KnowledgePagerAdapter extends FragmentPagerAdapter {
+public class KnowledgePagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragmentList;
     private List<String> mTitleList;
 

@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lzk.loveandroid.Knowledge.Bean.KnowledgeItem;
 import com.lzk.loveandroid.R;
+import com.lzk.loveandroid.Utils.LogUtil;
 
 import java.util.List;
 

@@ -148,10 +148,14 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Object object) {
                 if (isRefresh){
                     homeArticle = (HomeArticle) object;
+                    mHomeArticleAdapter.replaceData(homeArticle.getData().getDatas());
+                    mHomeRefreshLayout.finishRefresh();
+                    showPageContent();
                 }else {
+                    mHomeArticleAdapter.addData(((HomeArticle) object).getData().getDatas());
                     homeArticle.getData().getDatas().addAll(((HomeArticle) object).getData().getDatas());
+                    mHomeRefreshLayout.finishLoadMore();
                 }
-                updateRecyclerView(homeTopArticle , homeArticle);
             }
 
             @Override
@@ -269,21 +273,6 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-    }
-
-    private void updateRecyclerView(HomeTopArticle homeTopArticle , HomeArticle homeArticle){
-        if (isRefresh){
-            List<HomeArticle.Datas> datasList = homeTopArticle.getData();
-            if (datasList != null){
-                homeArticle.getData().getDatas().addAll(0,datasList);
-                mHomeArticleAdapter.replaceData(homeArticle.getData().getDatas());
-            }
-            mHomeRefreshLayout.finishRefresh();
-        }else {
-            mHomeArticleAdapter.addData(homeArticle.getData().getDatas());
-            mHomeRefreshLayout.finishLoadMore();
-        }
-        showPageContent();
     }
 
     /**

@@ -64,10 +64,12 @@ public class KnowledgeListFragment extends BaseFragment {
 
     @Override
     public void initEventAndData() {
-        LogUtil.d("initEventAndData");
         if (getArguments() != null){
             id = getArguments().getInt(INTENT_INDEX_ID);
         }
+
+        initRecyclerView();
+
         if (NetworkUtil.isNetworkConnected()){
             showLoadingLayout(null);
             requestKnowledgeItem(id,page);
@@ -99,23 +101,13 @@ public class KnowledgeListFragment extends BaseFragment {
     }
 
     /**
-     * 设置RecyclerView
+     * 初始化RecyclerView
      */
-    private void setRecyclerView(){
-        if (isRefresh){
-            if(mAdapter == null){
-                mAdapter = new KnowledgeItemAdapter(R.layout.layout_content_item,mKnowledgeItem.getData().getDatas());
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                mKnowledgeListRv.setLayoutManager(layoutManager);
-                mKnowledgeListRv.setAdapter(mAdapter);
-            }else {
-                mAdapter.replaceData(mKnowledgeItem.getData().getDatas());
-            }
-            mKnowledgeListRefreshLayout.finishRefresh();
-        }else {
-            mAdapter.addData(mKnowledgeItem.getData().getDatas());
-            mKnowledgeListRefreshLayout.finishLoadMore();
-        }
+    private void initRecyclerView(){
+        mAdapter = new KnowledgeItemAdapter(R.layout.layout_content_item,null);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mKnowledgeListRv.setLayoutManager(layoutManager);
+        mKnowledgeListRv.setAdapter(mAdapter);
     }
 
     /**
@@ -124,21 +116,20 @@ public class KnowledgeListFragment extends BaseFragment {
      * @param page
      */
     private void requestKnowledgeItem(int id,int page){
-        LogUtil.d("id:"+id);
         RequestCenter.requestKnowldgeItem(id, page, new IResultCallback() {
             @Override
             public void onSuccess(Object object) {
                 if (isRefresh){
                     mKnowledgeItem = (KnowledgeItem) object;
+                    mAdapter.replaceData(mKnowledgeItem.getData().getDatas());
+                    mKnowledgeListRefreshLayout.finishRefresh();
+                    showPageContent();
                 }else {
+                    mAdapter.addData(((KnowledgeItem)object).getData().getDatas());
                     mKnowledgeItem.getData().getDatas().addAll(((KnowledgeItem)object).getData().getDatas());
+                    mKnowledgeListRefreshLayout.finishLoadMore();
                 }
-                if (mKnowledgeItem.getData().getDatas().size() == 0){
-                    LogUtil.d("size == 0");
-                }
-                setRecyclerView();
-                LogUtil.d("request");
-                showPageContent();
+
             }
 
             @Override

@@ -166,7 +166,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
         hideCurrentView();
         currentState = NORMAL_STATE;
         if (mPageContentView.getVisibility() ==View.INVISIBLE){
-            LogUtil.d("visible");
             mPageContentView.setVisibility(View.VISIBLE);
         }
     }

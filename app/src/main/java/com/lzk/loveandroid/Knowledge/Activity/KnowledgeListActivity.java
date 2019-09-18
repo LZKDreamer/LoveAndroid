@@ -113,6 +113,7 @@ public class KnowledgeListActivity extends BaseActivity {
         }
 
         mPagerAdapter = new KnowledgePagerAdapter(getSupportFragmentManager(),mFragmentList,mTitleList);
+        mKnowledgeListViewPager.setCurrentItem(0);
         mKnowledgeListViewPager.setAdapter(mPagerAdapter);
         mKnowledgeListTabLayout.setupWithViewPager(mKnowledgeListViewPager);
         //mKnowledgeListTabLayout.getTabAt(0).select();
