@@ -28,5 +28,6 @@ public class KnowledgeItemAdapter extends BaseQuickAdapter<KnowledgeItem.DataBea
            helper.setText(R.id.content_item_title_tv,item.getTitle());
            helper.setText(R.id.content_item_chapter_tv,item.getSuperChapterName()+"/"+item.getChapterName());
            helper.getView(R.id.content_item_collect_iv).setSelected(item.isCollect());
+           helper.addOnClickListener(R.id.content_item_collect_iv);
     }
 }

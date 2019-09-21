@@ -3,6 +3,7 @@ package com.lzk.loveandroid.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -59,7 +60,8 @@ public class ArticleDetailActivity extends BaseActivity {
         if (getIntent() != null) {
             url = getIntent().getStringExtra(INTENT_URL);
             title = getIntent().getStringExtra(INTENT_TITLE);
-            commonToolbarTitleTv.setText(title);
+            commonToolbarTitleTv.setText(Html.fromHtml(title));
+            commonToolbarTitleTv.setSelected(true);
         }
 
         if (NetworkUtil.isNetworkConnected()) {

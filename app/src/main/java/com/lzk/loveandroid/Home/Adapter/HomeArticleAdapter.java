@@ -27,7 +27,7 @@ public class HomeArticleAdapter extends BaseQuickAdapter<HomeArticle.Datas,BaseV
     @Override
     protected void convert(@NonNull BaseViewHolder helper, HomeArticle.Datas item) {
         //置顶
-        if (helper.getLayoutPosition()<4){
+        if (helper.getAdapterPosition() < 4){
             helper.getView(R.id.article_item_tag_tv).setVisibility(View.VISIBLE);
         }else {
             helper.getView(R.id.article_item_tag_tv).setVisibility(View.GONE);

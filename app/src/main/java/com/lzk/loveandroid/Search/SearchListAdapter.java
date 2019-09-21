@@ -1,5 +1,7 @@
 package com.lzk.loveandroid.Search;
 
+import android.text.Html;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -24,7 +26,7 @@ public class SearchListAdapter extends BaseQuickAdapter<SearchResult.DataBean.Da
         //时间
         helper.setText(R.id.article_item_time_tv,item.getNiceDate());
         //标题
-        helper.setText(R.id.article_item_title_tv,item.getTitle());
+        helper.setText(R.id.article_item_title_tv, Html.fromHtml(item.getTitle()));
         //类别
         helper.setText(R.id.article_item_chapter_tv,item.getChapterName()+"/"+item.getSuperChapterName());
         //收藏

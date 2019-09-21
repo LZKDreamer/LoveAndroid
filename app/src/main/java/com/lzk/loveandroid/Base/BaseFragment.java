@@ -16,6 +16,8 @@ import com.hjq.toast.ToastUtils;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Utils.LogUtil;
 
+import java.util.PrimitiveIterator;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -48,6 +50,17 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
 
     private Unbinder unBinder;
 
+    //懒加载
+    /**
+     * 是否初始化过布局
+     */
+    protected boolean isViewInitiated;
+    /**
+     * 是否加载过数据
+     */
+    protected boolean isDataInitiated;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +73,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initStateView();
-        initEventAndData();
     }
 
     public void onDestroyView() {
@@ -69,6 +81,14 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
             unBinder.unbind();
             unBinder = null;
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isViewInitiated=true;
+        //加载数据
+        lazyLoadData();
     }
 
     private void initStateView(){
@@ -180,6 +200,7 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
                     return;
                 }
                 if (mPageContentView.getVisibility() == View.VISIBLE){
+                    LogUtil.d("hideCurrentView");
                     mPageContentView.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -217,7 +238,25 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
     /**
      * 重新加载
      */
-    public void reload(){};
+    public void reload(){}
+
+    /**
+     * 懒加载数据
+     */
+    public void lazyLoadData(){
+        if (getUserVisibleHint() && isViewInitiated && !isDataInitiated) {
+            initEventAndData();
+            isDataInitiated = true;//不再重复加载
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            lazyLoadData();
+        }
+    }
 
     @Override
     public void onClick(View v) {

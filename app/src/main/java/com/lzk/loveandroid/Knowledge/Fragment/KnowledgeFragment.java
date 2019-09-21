@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzk.loveandroid.Base.BaseFragment;
@@ -77,7 +78,7 @@ public class KnowledgeFragment extends BaseFragment {
     private void setRecyclerView(){
         if (mAdapter == null){
             mAdapter = new KnowledgeAdapter(R.layout.layout_knowledge_item,mKnowledgeBean.getData());
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
             mKnowledgeRv.setLayoutManager(layoutManager);
             mKnowledgeRv.setAdapter(mAdapter);
 

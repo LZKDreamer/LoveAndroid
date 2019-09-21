@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.Knowledge.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzk.loveandroid.Base.BaseFragment;
 import com.lzk.loveandroid.Knowledge.Adapter.KnowledgeItemAdapter;
 import com.lzk.loveandroid.Knowledge.Bean.KnowledgeItem;
@@ -20,6 +22,7 @@ import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
 import com.lzk.loveandroid.Utils.LogUtil;
 import com.lzk.loveandroid.Utils.NetworkUtil;
+import com.lzk.loveandroid.main.ArticleDetailActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -108,6 +111,28 @@ public class KnowledgeListFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mKnowledgeListRv.setLayoutManager(layoutManager);
         mKnowledgeListRv.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = ArticleDetailActivity.newIntent(getActivity(),mKnowledgeItem.getData().getDatas().get(position).getTitle(),
+                        mKnowledgeItem.getData().getDatas().get(position).getLink());
+                startActivity(intent);
+            }
+        });
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.content_item_collect_iv:
+                        if (mKnowledgeItem.getData().getDatas().get(position).isCollect()){
+                            requestUnCollectArticle(mKnowledgeItem.getData().getDatas().get(position).getId()+"",position);
+                        }else {
+                            requestCollectArticle(mKnowledgeItem.getData().getDatas().get(position).getId()+"",position);
+                        }
+                        break;
+                }
+            }
+        });
     }
 
     /**
@@ -140,6 +165,65 @@ public class KnowledgeListFragment extends BaseFragment {
             @Override
             public void onError() {
                 showErrorLayout(getString(R.string.error));
+            }
+        });
+    }
+
+    /**
+     * 返回顶部
+     */
+    public void backToTop(){
+        if (mKnowledgeListRv != null){
+            mKnowledgeListRv.smoothScrollToPosition(0);
+        }
+    }
+
+    /**
+     * 收藏文章
+     * @param articleId
+     */
+    private void requestCollectArticle(String articleId,int position){
+        RequestCenter.requestCollectArticle(articleId, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                showToastInCenter(getString(R.string.collect_success));
+                mKnowledgeItem.getData().getDatas().get(position).setCollect(true);
+                mAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /**
+     * 取消收藏
+     * @param articleId
+     */
+    private void requestUnCollectArticle(String articleId,int position){
+        RequestCenter.requestUnCollectArticle(articleId, new IResultCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                showToastInCenter(getString(R.string.uncollect_success));
+                mKnowledgeItem.getData().getDatas().get(position).setCollect(false);
+                mAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onFailure(int errCode, String errMsg) {
+                showToastInCenter(errMsg);
+            }
+
+            @Override
+            public void onError() {
+
             }
         });
     }

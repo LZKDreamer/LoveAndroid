@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dp_3"
+    android:layout_margin="@dimen/dp_5">
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10">
-            <TextView
-                android:id="@+id/knowledge_item_title_tv"
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_dark"
-                android:textSize="@dimen/sp_18"
-                android:text="开发环境"/>
-            <TextView
-                android:id="@+id/knowledge_item_tag_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_article_author"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="AndroidStudio相关  gradle  官方发布"/>
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:id="@+id/knowledge_item_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_dark"
+                    android:textSize="@dimen/sp_18"
+                    android:text="开发环境"/>
+                <TextView
+                    android:id="@+id/knowledge_item_tag_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_article_author"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="AndroidStudio相关  gradle  官方发布"/>
+            </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_arrow_right"
-            android:layout_gravity="center_vertical"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="@color/color_divider"/>
-</LinearLayout>
+</androidx.cardview.widget.CardView>
