@@ -32,6 +32,7 @@ import com.lzk.loveandroid.Home.Fragment.HomeFragment;
 import com.lzk.loveandroid.Knowledge.Fragment.KnowledgeFragment;
 import com.lzk.loveandroid.Login.LoginActivity;
 import com.lzk.loveandroid.Navigation.Fragment.NavFragment;
+import com.lzk.loveandroid.Project.Bean.ProjectList;
 import com.lzk.loveandroid.Project.Fragment.ProjectFragment;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
@@ -282,7 +283,21 @@ public class MainActivity extends BaseActivity {
                 mKnowledgeFragment.backToTop();
             }
         }
-
+        if (mWXFragment != null){
+            if (mWXFragment.isVisible()){
+                mWXFragment.backToTop();
+            }
+        }
+        if (mNavFragment != null){
+            if (mNavFragment.isVisible()){
+                mNavFragment.backToTop();
+            }
+        }
+        if (mProjectFragment != null){
+            if (mProjectFragment.isVisible()){
+                mProjectFragment.backToTop();
+            }
+        }
 
     }
 

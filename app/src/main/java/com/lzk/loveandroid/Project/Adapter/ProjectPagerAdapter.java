@@ -1,30 +1,27 @@
-package com.lzk.loveandroid.Knowledge.Adapter;
+package com.lzk.loveandroid.Project.Adapter;
 
+import android.service.autofill.LuhnChecksumValidator;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.lzk.loveandroid.Knowledge.Fragment.KnowledgeListFragment;
+import com.lzk.loveandroid.Project.Fragment.ProjectListFragment;
 
 import java.util.List;
 
-/**
- * @author LiaoZhongKai
- * @date 2019/9/18.
- */
-public class KnowledgePagerAdapter extends FragmentStatePagerAdapter {
-    private List<KnowledgeListFragment> mFragmentList;
-    private List<String> mTitleList;
+public class ProjectPagerAdapter extends FragmentStatePagerAdapter {
 
-    public KnowledgePagerAdapter(FragmentManager fm, List<KnowledgeListFragment> mFragmentList, List<String> mTitleList) {
+    private List<String> mTitleList;
+    private List<ProjectListFragment> mFragmentList;
+
+    public ProjectPagerAdapter(FragmentManager fm,List<String> mTitleList,List<ProjectListFragment> mFragmentList) {
         super(fm);
-        this.mFragmentList = mFragmentList;
         this.mTitleList = mTitleList;
+        this.mFragmentList = mFragmentList;
     }
 
     @Override
@@ -34,7 +31,7 @@ public class KnowledgePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragmentList == null ? 0:mFragmentList.size();
+        return mTitleList == null?0:mTitleList.size();
     }
 
     @Nullable

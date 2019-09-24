@@ -3,12 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Navigation.Fragment.NavFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/page_content_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <q.rorbin.verticaltablayout.VerticalTabLayout
+                android:id="@+id/nav_tab_layout"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                app:indicator_color="@color/colorWhite"
+                app:indicator_gravity="fill"
+                app:tab_height="@dimen/dp_50"
+                app:tab_margin="@dimen/dp_16"
+                app:tab_mode="scrollable">
+
+            </q.rorbin.verticaltablayout.VerticalTabLayout>
+            <View
+                android:layout_width="@dimen/dp_1"
+                android:layout_height="match_parent"
+                android:background="@color/color_divider"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nav_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarThumbVertical="@color/color_tab_item_normal"
+                android:scrollbarSize="3dp"
+                android:scrollbars="vertical">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

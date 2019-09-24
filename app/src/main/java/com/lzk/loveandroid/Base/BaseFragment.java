@@ -200,7 +200,6 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
                     return;
                 }
                 if (mPageContentView.getVisibility() == View.VISIBLE){
-                    LogUtil.d("hideCurrentView");
                     mPageContentView.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -228,22 +227,22 @@ public abstract class BaseFragment extends Fragment implements IBaseView, View.O
      * 加载布局文件
      * @return
      */
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     /**
      * 初始化事件和数据
      */
-    public abstract void initEventAndData();
+    protected abstract void initEventAndData();
 
     /**
      * 重新加载
      */
-    public void reload(){}
+    protected void reload(){}
 
     /**
      * 懒加载数据
      */
-    public void lazyLoadData(){
+    private void lazyLoadData(){
         if (getUserVisibleHint() && isViewInitiated && !isDataInitiated) {
             initEventAndData();
             isDataInitiated = true;//不再重复加载

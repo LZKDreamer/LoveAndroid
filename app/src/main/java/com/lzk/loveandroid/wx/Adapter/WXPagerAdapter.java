@@ -1,4 +1,4 @@
-package com.lzk.loveandroid.Knowledge.Adapter;
+package com.lzk.loveandroid.wx.Adapter;
 
 import android.view.ViewGroup;
 
@@ -6,22 +6,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.lzk.loveandroid.Knowledge.Fragment.KnowledgeListFragment;
+import com.lzk.loveandroid.wx.Fragment.WXListFragment;
 
 import java.util.List;
 
-/**
- * @author LiaoZhongKai
- * @date 2019/9/18.
- */
-public class KnowledgePagerAdapter extends FragmentStatePagerAdapter {
-    private List<KnowledgeListFragment> mFragmentList;
+public class WXPagerAdapter extends FragmentStatePagerAdapter {
+
+    private List<WXListFragment> mFragmentList;
     private List<String> mTitleList;
 
-    public KnowledgePagerAdapter(FragmentManager fm, List<KnowledgeListFragment> mFragmentList, List<String> mTitleList) {
+
+    public WXPagerAdapter(FragmentManager fm,List<WXListFragment> mFragmentList,List<String> mTitleList) {
         super(fm);
         this.mFragmentList = mFragmentList;
         this.mTitleList = mTitleList;

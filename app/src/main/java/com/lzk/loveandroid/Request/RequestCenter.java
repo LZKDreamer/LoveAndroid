@@ -7,9 +7,15 @@ import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
 import com.lzk.loveandroid.Home.Bean.Home.HomeTopArticle;
 import com.lzk.loveandroid.Knowledge.Bean.KnowledgeBean;
 import com.lzk.loveandroid.Knowledge.Bean.KnowledgeItem;
+import com.lzk.loveandroid.Navigation.Bean.NavigationBean;
+import com.lzk.loveandroid.Project.Bean.ProjectList;
+import com.lzk.loveandroid.Project.Bean.ProjectTab;
 import com.lzk.loveandroid.Search.Bean.SearchResult;
 import com.lzk.loveandroid.Search.Bean.SearchHotkey;
 import com.lzk.loveandroid.Utils.LogUtil;
+import com.lzk.loveandroid.wx.Adapter.WXPagerAdapter;
+import com.lzk.loveandroid.wx.Bean.WXArticle;
+import com.lzk.loveandroid.wx.Bean.WXTab;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -382,6 +388,149 @@ public class RequestCenter {
                             callback.onSuccess(knowledgeItem);
                         }else {
                             callback.onFailure(knowledgeItem.getErrorCode(),knowledgeItem.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 公众号Tab
+     * @param callback
+     */
+    public static void requestWXTabList(IResultCallback callback){
+        OkGo.<String>get("https://wanandroid.com/wxarticle/chapters/json ")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        WXTab wxTab = gson.fromJson(response.body(),WXTab.class);
+                        if (wxTab.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(wxTab);
+                        }else {
+                            callback.onFailure(wxTab.getErrorCode(),wxTab.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 公众号文章列表
+     * @param id
+     * @param page
+     * @param callback
+     */
+    public static void requestWXArticle(int id,int page,IResultCallback callback){
+        OkGo.<String>get("https://wanandroid.com/wxarticle/list/"+id+"/"+page+"/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        WXArticle wxArticle = gson.fromJson(response.body(),WXArticle.class);
+                        if (wxArticle.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(wxArticle);
+                        }else {
+                            callback.onFailure(wxArticle.getErrorCode(),wxArticle.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 导航数据
+     */
+    public static void requestNavgationData(IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/navi/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        NavigationBean navigationBean = gson.fromJson(response.body(),NavigationBean.class);
+                        if (navigationBean.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(navigationBean);
+                        }else {
+                            callback.onFailure(navigationBean.getErrorCode(),navigationBean.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 项目tab
+     * @param callback
+     */
+    public static void requestProjectTabList(IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/project/tree/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        ProjectTab projectTab = gson.fromJson(response.body(),ProjectTab.class);
+                        if (projectTab.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(projectTab);
+                        }else {
+                            callback.onFailure(projectTab.getErrorCode(),projectTab.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 项目文章列表
+     * @param id
+     * @param page
+     * @param callback
+     */
+    public static void requestProjectList(int id,int page,IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/project/list/"+page+"/json?cid="+id)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        ProjectList projectList = gson.fromJson(response.body(),ProjectList.class);
+                        if (projectList.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(projectList);
+                        }else {
+                            callback.onFailure(projectList.getErrorCode(),projectList.getErrorMsg());
                         }
                     }
 
