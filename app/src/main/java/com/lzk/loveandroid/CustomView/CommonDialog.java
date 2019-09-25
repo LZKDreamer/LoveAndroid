@@ -17,8 +17,6 @@ import com.lzk.loveandroid.Utils.CommonUtil;
 
 /**
 * @description 通用消息对话框
-* @author majinxin
-* @date 2015年8月20日
 */ 
 public class CommonDialog extends Dialog
 {

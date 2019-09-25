@@ -2,6 +2,7 @@ package com.lzk.loveandroid.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.jaeger.library.StatusBarUtil;
 import com.lzk.loveandroid.App.AppConstant;
 import com.lzk.loveandroid.Base.BaseActivity;
+import com.lzk.loveandroid.Collection.CollectionActivity;
 import com.lzk.loveandroid.CommonWeb.Activity.CommonWebActivity;
 import com.lzk.loveandroid.CustomView.CommonDialog;
 import com.lzk.loveandroid.EventBus.Event;
@@ -32,13 +34,11 @@ import com.lzk.loveandroid.Home.Fragment.HomeFragment;
 import com.lzk.loveandroid.Knowledge.Fragment.KnowledgeFragment;
 import com.lzk.loveandroid.Login.LoginActivity;
 import com.lzk.loveandroid.Navigation.Fragment.NavFragment;
-import com.lzk.loveandroid.Project.Bean.ProjectList;
 import com.lzk.loveandroid.Project.Fragment.ProjectFragment;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
-import com.lzk.loveandroid.Search.SearchActivity;
-import com.lzk.loveandroid.Search.SearchHistoryAdapter;
+import com.lzk.loveandroid.Search.Activity.SearchActivity;
 import com.lzk.loveandroid.Utils.SPUtil;
 import com.lzk.loveandroid.wx.Fragment.WXFragment;
 
@@ -74,6 +74,8 @@ public class MainActivity extends BaseActivity {
     private FragmentTransaction mTransaction;
     private FragmentManager mFragmentManager;
 
+    private long mExitTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +110,13 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.header_favorite://收藏
                         //mMainDrawerLayout.closeDrawers();
+                        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+                            Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.header_setting://设置
                         //mMainDrawerLayout.closeDrawers();
@@ -115,7 +124,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.header_about_us://关于我们
                         //mMainDrawerLayout.closeDrawers();
                         break;
-                    case R.id.header_logout:
+                    case R.id.header_logout://退出登录
                         CommonDialog dialog = new CommonDialog(MainActivity.this, getString(R.string.prompt)
                                 , getString(R.string.is_logout), getString(R.string.sure_logout), getString(R.string.cancel),
                                 new CommonDialog.DialogClickListener() {
@@ -346,5 +355,19 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            if ((System.currentTimeMillis() - mExitTime)>2000){
+                showToastInCenter(getString(R.string.exit_app_prompt));
+                mExitTime = System.currentTimeMillis();
+            }else {
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

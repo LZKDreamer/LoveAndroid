@@ -14,9 +14,10 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".Knowledge.Activity.KnowledgeListActivity"></activity>
-        <activity android:name=".Search.SearchListActivity" />
-        <activity android:name=".Search.SearchActivity" />
+        <activity android:name=".Collection.CollectionActivity"></activity>
+        <activity android:name=".Knowledge.Activity.KnowledgeListActivity" />
+        <activity android:name=".Search.Activity.SearchListActivity" />
+        <activity android:name=".Search.Activity.SearchActivity" />
         <activity android:name=".CommonWeb.Activity.CommonWebActivity" />
         <activity android:name=".main.ArticleDetailActivity" />
         <activity android:name=".Register.RegisterActivity" />

@@ -1,4 +1,4 @@
-package com.lzk.loveandroid.Search;
+package com.lzk.loveandroid.Search.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.lzk.loveandroid.Search;
+package com.lzk.loveandroid.Search.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +22,7 @@ import com.lzk.loveandroid.Base.BaseActivity;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
+import com.lzk.loveandroid.Search.Adapter.SearchListAdapter;
 import com.lzk.loveandroid.Search.Bean.SearchResult;
 import com.lzk.loveandroid.Utils.NetworkUtil;
 import com.lzk.loveandroid.main.ArticleDetailActivity;

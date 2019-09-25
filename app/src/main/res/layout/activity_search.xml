@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search.SearchActivity">
+    tools:context=".Search.Activity.SearchActivity">
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/search_title_bar_ll"

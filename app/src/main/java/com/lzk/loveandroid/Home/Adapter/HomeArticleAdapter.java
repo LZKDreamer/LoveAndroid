@@ -1,5 +1,6 @@
 package com.lzk.loveandroid.Home.Adapter;
 
+import android.text.Html;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class HomeArticleAdapter extends BaseQuickAdapter<HomeArticle.Datas,BaseV
         //时间
         helper.setText(R.id.article_item_time_tv,item.getNiceDate());
         //标题
-        helper.setText(R.id.article_item_title_tv,item.getTitle());
+        helper.setText(R.id.article_item_title_tv, Html.fromHtml(item.getTitle()));
         //类别
         helper.setText(R.id.article_item_chapter_tv,item.getChapterName()+"/"+item.getSuperChapterName());
         //收藏

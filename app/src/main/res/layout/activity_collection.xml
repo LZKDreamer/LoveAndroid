@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Search.Activity.SearchListActivity">
+    tools:context=".Collection.CollectionActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,19 +16,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/search_list_refresh_layout"
+            android:id="@+id/collection_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
             </com.scwang.smartrefresh.layout.header.ClassicsHeader>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_list_rv"
+                android:id="@+id/collection_rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                >
 
             </androidx.recyclerview.widget.RecyclerView>
             <com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -39,7 +42,7 @@
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </FrameLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/search_list_float_btn"
+        android:id="@+id/collection_float_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_back_top"

@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.Request;
 
 import com.google.gson.Gson;
+import com.lzk.loveandroid.Collection.Bean.FavoriteArticle;
 import com.lzk.loveandroid.CommonWeb.Bean.CommonWebBean;
 import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.Home.Bean.Home.HomeBanner;
@@ -175,6 +176,27 @@ public class RequestCenter {
     }
 
     /**
+     * 取消收藏（我的收藏）
+     * @param id
+     * @param callback
+     */
+    public static void requestUnCollectFavoriteArticle(int id,int originId,IResultCallback callback){
+        OkGo.<String>post("https://www.wanandroid.com/lg/uncollect/"+id+"/json")
+                .params("originId",originId)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        FavoriteArticle favoriteArticle = gson.fromJson(response.body(),FavoriteArticle.class);
+                        if (favoriteArticle.getErrorCode() == favoriteArticle.getErrorCode()){
+                            callback.onSuccess(null);
+                        }else {
+                            callback.onFailure(favoriteArticle.getErrorCode(),favoriteArticle.getErrorMsg());
+                        }
+                    }
+                });
+    }
+
+    /**
      * 登录
      * @param username
      * @param password
@@ -187,7 +209,6 @@ public class RequestCenter {
                     @Override
                     public void onSuccess(Response<String> response) {
                         String result = response.body();
-                        LogUtil.d("RequestCenter",result);
                         HomeArticle homeArticle = gson.fromJson(result,HomeArticle.class);
                         if (homeArticle.getErrorCode() == Constant.SUCCESS_CODE){
                             callback.onSuccess(homeArticle);
@@ -531,6 +552,34 @@ public class RequestCenter {
                             callback.onSuccess(projectList);
                         }else {
                             callback.onFailure(projectList.getErrorCode(),projectList.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Throwable throwable = response.getException();
+                        if (throwable != null){
+                            LogUtil.e(TAG,throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 我的收藏
+     * @param callback
+     */
+    public static void requestCollectionArticle(int page,IResultCallback callback){
+        OkGo.<String>get("https://www.wanandroid.com/lg/collect/list/"+page+"/json")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        FavoriteArticle favoriteArticle = gson.fromJson(response.body(),FavoriteArticle.class);
+                        if (favoriteArticle.getErrorCode() == Constant.SUCCESS_CODE){
+                            callback.onSuccess(favoriteArticle);
+                        }else {
+                            callback.onFailure(favoriteArticle.getErrorCode(),favoriteArticle.getErrorMsg());
                         }
                     }
 

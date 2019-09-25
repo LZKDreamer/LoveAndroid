@@ -1,6 +1,5 @@
-package com.lzk.loveandroid.Search;
+package com.lzk.loveandroid.Search.Activity;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +26,8 @@ import com.lzk.loveandroid.DB.Search.SearchHistoryBean;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
+import com.lzk.loveandroid.Search.Adapter.SearchHistoryAdapter;
 import com.lzk.loveandroid.Search.Bean.SearchHotkey;
-import com.lzk.loveandroid.main.ArticleDetailActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
