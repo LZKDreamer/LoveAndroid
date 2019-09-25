@@ -3,6 +3,8 @@ package com.lzk.loveandroid.Utils;
 import android.content.Context;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.lzk.loveandroid.App.AppConstant;
 
 import java.util.Random;
@@ -33,5 +35,27 @@ public class CommonUtil {
             position = -position;
         }
         return AppConstant.TAG_COLORS[position];
+    }
+
+    /**
+     * 是否是夜间模式
+     * @return
+     */
+    public static boolean isNightMode(){
+        return SPUtil.getInstance().getBoolean(AppConstant.NIGHT_MODE,false);
+    }
+
+    /**
+     * 设置夜间模式
+     * @param isNightMode 是否是夜间模式
+     */
+    public static void setDayNightMode(boolean isNightMode){
+        if (isNightMode){
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }

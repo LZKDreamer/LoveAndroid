@@ -39,6 +39,7 @@ import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
 import com.lzk.loveandroid.Search.Activity.SearchActivity;
+import com.lzk.loveandroid.Utils.CommonUtil;
 import com.lzk.loveandroid.Utils.SPUtil;
 import com.lzk.loveandroid.wx.Fragment.WXFragment;
 
@@ -116,6 +117,17 @@ public class MainActivity extends BaseActivity {
                         }else {
                             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                             startActivity(intent);
+                        }
+                        break;
+                    case R.id.header_day_night_mode://夜间模式
+                        if (CommonUtil.isNightMode()){
+                            menuItem.setTitle(getString(R.string.drawer_nav_day_mode));
+                            CommonUtil.setDayNightMode(false);
+                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,false);
+                        }else {
+                            menuItem.setTitle(getString(R.string.drawer_nav_night_mode));
+                            CommonUtil.setDayNightMode(true);
+                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,true);
                         }
                         break;
                     case R.id.header_setting://设置

@@ -4,8 +4,11 @@
         <item
             android:id="@+id/header_favorite"
             android:icon="@drawable/icon_favorite_normal"
-
             android:title="@string/drawer_nav_favorite"/>
+        <item
+            android:id="@+id/header_day_night_mode"
+            android:icon="@drawable/icon_nav_night_mode"
+            android:title="@string/drawer_nav_night_mode"/>
         <item
             android:id="@+id/header_setting"
             android:icon="@drawable/icon_setting_normal"

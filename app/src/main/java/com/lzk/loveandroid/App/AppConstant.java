@@ -25,4 +25,7 @@ public class AppConstant {
             ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_four),
             ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_five),
     };
+
+    //夜间模式
+    public static final String NIGHT_MODE = "night_mode";
 }

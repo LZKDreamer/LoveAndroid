@@ -26,6 +26,8 @@
     <string name="drawer_nav_about_us">关于我们</string>
     <string name="drawer_header_username">用户名</string>
     <string name="drawer_nav_logout">退出登录</string>
+    <string name="drawer_nav_night_mode">夜间模式</string>
+    <string name="drawer_nav_day_mode">日间模式</string>
 
     //首页文章
     <string name="article_top">置顶</string>

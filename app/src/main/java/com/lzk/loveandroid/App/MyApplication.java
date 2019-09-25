@@ -3,7 +3,12 @@ package com.lzk.loveandroid.App;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.hjq.toast.ToastUtils;
+import com.lzk.loveandroid.Utils.CommonUtil;
+import com.lzk.loveandroid.Utils.SPUtil;
+import com.lzk.loveandroid.main.SplashActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.SPCookieStore;
@@ -32,6 +37,9 @@ public class MyApplication extends Application {
         ToastUtils.init(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
         LitePal.initialize(this);
+
+        //设置夜间模式
+        CommonUtil.setDayNightMode(CommonUtil.isNightMode());
     }
 
     public static synchronized Context getContext(){

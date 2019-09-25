@@ -5,8 +5,10 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#ffffff</color>
     <color name="color_dark">#000000</color>
+    <color name="colorBg">#FFFFFF</color>
     <color name="colorPrimaryToolbar">#3CB371</color>
     <color name="color_tab_item_normal">#A9A9A9</color>
+    <color name="color_tab_item_select">#3CB371</color>
     <color name="color_article_tag">#D81B60</color>
     <color name="color_article_author">#808080</color>
     <color name="color_article_time">#D3D3D3</color>
