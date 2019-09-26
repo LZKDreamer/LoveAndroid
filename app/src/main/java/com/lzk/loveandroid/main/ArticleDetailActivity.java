@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 
 import com.jaeger.library.StatusBarUtil;
 import com.just.agentweb.AgentWeb;
@@ -48,7 +47,7 @@ public class ArticleDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryToolbar));
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.toolbar));
         setSupportActionBar(commonToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

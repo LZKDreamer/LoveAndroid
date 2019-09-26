@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:background="@color/colorWhite"
+             android:background="@color/common_bg"
              android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:textSize="22sp"
-            android:textColor="@color/color_dialog_title"
+            android:textColor="@color/common_dialog_title"
             android:visibility="visible"/>
 
         <TextView
@@ -30,14 +30,14 @@
             android:layout_marginTop="5dp"
             android:layout_weight="0.87"
             android:minHeight="80dp"
-            android:textColor="@color/color_dialog_content"
+            android:textColor="@color/common_dialog_content"
             android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginTop="10dp"
-            android:background="@color/color_divider"/>
+            android:background="@color/divider_line"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,13 +56,13 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textColor="@color/color_dialog_cancel"
+                    android:textColor="@color/common_dialog_cancel"
                     android:textSize="16sp"/>
 
                 <View
                     android:layout_width="0.5dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_divider"/>
+                    android:background="@color/divider_line"/>
 
                 <TextView
                     android:id="@+id/confirm_btn"
@@ -70,7 +70,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textColor="@color/color_dialog_confirm"
+                    android:textColor="@color/common_dialog_confirm"
                     android:textSize="16sp"/>
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:textColor="@color/color_dialog_confirm"
+                    android:textColor="@color/common_dialog_confirm"
                     android:textSize="16sp"/>
             </LinearLayout>
         </RelativeLayout>

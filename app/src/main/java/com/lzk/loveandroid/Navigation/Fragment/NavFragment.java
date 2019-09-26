@@ -90,7 +90,7 @@ public class NavFragment extends BaseFragment {
                 return new TabView.TabTitle.Builder()
                         .setContent(list.get(position).getName())
                         .setTextColor(ContextCompat.getColor(getActivity(),R.color.colorPrimary),
-                                ContextCompat.getColor(getActivity(),R.color.color_tab_item_normal)).build();
+                                ContextCompat.getColor(getActivity(),R.color.tab_item_default)).build();
             }
 
             @Override

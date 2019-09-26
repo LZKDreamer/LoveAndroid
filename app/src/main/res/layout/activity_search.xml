@@ -11,7 +11,7 @@
         android:id="@+id/search_title_bar_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:background="@color/colorPrimaryToolbar"
+        android:background="@color/toolbar"
         >
         <ImageView
             android:id="@+id/search_back_iv"
@@ -29,11 +29,11 @@
             android:background="@drawable/bg_search_shape"
             android:layout_gravity="center_vertical"
             android:hint="@string/search_hint"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/common_bg"
             android:paddingVertical="@dimen/dp_5"
             android:paddingHorizontal="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:textColorHint="@color/color_search_hint"
+            android:textColorHint="@color/search_hint"
             android:textSize="@dimen/sp_16"
             android:imeOptions="actionSearch"
             android:maxLines="1"
@@ -45,7 +45,7 @@
             android:layout_height="@dimen/dp_30"
             android:text="@string/search"
             android:background="@drawable/bg_search_btn"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/common_bg"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_gravity="center_vertical"
             />
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="@string/hot_search"
-            android:textColor="@color/color_hot_search"/>
+            android:textColor="@color/hot_search_tag"/>
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/search_hot_flow_layout"
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
                 android:text="@string/search_history"
-                android:textColor="@color/color_search_common"
+                android:textColor="@color/search_common"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"/>
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/clear_search_history"
                 android:textSize="@dimen/sp_16"
-                android:textColor="@color/color_dark"
+                android:textColor="@color/common_text_default"
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@drawable/icon_trash"
                 android:layout_centerVertical="true"

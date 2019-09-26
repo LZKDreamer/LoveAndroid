@@ -5,5 +5,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/color_divider"/>
+        android:background="@color/divider_line"/>
 </LinearLayout>

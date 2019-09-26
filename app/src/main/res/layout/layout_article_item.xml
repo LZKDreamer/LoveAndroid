@@ -20,7 +20,7 @@
                 android:id="@+id/article_item_author_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_article_author"
+                android:textColor="@color/item_article_author"
                 android:text="author"
                 android:textSize="@dimen/sp_12"
                 android:layout_alignParentLeft="true"
@@ -34,7 +34,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:text="10分钟前"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_article_time"
+                android:textColor="@color/item_article_time"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/color_dark"
+            android:textColor="@color/common_text_default"
             android:text="Android职业进阶课程免费送"/>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_article_author"
+                android:textColor="@color/item_article_author"
                 android:text="干货资源/课程推荐"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"

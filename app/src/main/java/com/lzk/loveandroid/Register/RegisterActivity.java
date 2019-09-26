@@ -15,8 +15,6 @@ import com.lzk.loveandroid.Base.BaseActivity;
 import com.lzk.loveandroid.EventBus.Event;
 import com.lzk.loveandroid.EventBus.EventConstant;
 import com.lzk.loveandroid.EventBus.EventUtil;
-import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
-import com.lzk.loveandroid.Login.LoginActivity;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Request.IResultCallback;
 import com.lzk.loveandroid.Request.RequestCenter;
@@ -44,7 +42,7 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.colorWhite));
+        StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.common_bg));
     }
 
     @Override

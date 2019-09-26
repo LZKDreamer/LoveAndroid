@@ -18,8 +18,8 @@
                 android:id="@+id/nav_tab_layout"
                 android:layout_width="@dimen/dp_110"
                 android:layout_height="match_parent"
-                android:background="@color/colorWhite"
-                app:indicator_color="@color/colorWhite"
+                android:background="@color/common_bg"
+                app:indicator_color="@color/common_bg"
                 app:indicator_gravity="fill"
                 app:tab_height="@dimen/dp_50"
                 app:tab_margin="@dimen/dp_16"
@@ -29,12 +29,12 @@
             <View
                 android:layout_width="@dimen/dp_1"
                 android:layout_height="match_parent"
-                android:background="@color/color_divider"/>
+                android:background="@color/divider_line"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nav_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbarThumbVertical="@color/color_tab_item_normal"
+                android:scrollbarThumbVertical="@color/tab_item_default"
                 android:scrollbarSize="3dp"
                 android:scrollbars="vertical">
 

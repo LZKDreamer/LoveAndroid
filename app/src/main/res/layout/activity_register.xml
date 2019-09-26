@@ -24,7 +24,7 @@
         android:text="@string/register"
         android:textSize="@dimen/sp_36"
         android:gravity="center"
-        android:textColor="@color/color_dark"
+        android:textColor="@color/common_text_default"
         android:layout_marginTop="@dimen/dp_30"
         />
     <androidx.cardview.widget.CardView
@@ -51,7 +51,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/color_divider"
+                android:background="@color/divider_line"
                 android:layout_marginVertical="20dp"/>
             <EditText
                 android:id="@+id/register_psw_et"
@@ -66,7 +66,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/color_divider"
+                android:background="@color/divider_line"
                 android:layout_marginVertical="20dp"/>
             <EditText
                 android:id="@+id/register_repeat_psw_et"
@@ -81,7 +81,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/color_divider"
+                android:background="@color/divider_line"
                 android:layout_marginVertical="20dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -98,7 +98,7 @@
             android:layout_marginHorizontal="@dimen/dp_60"
             android:background="@drawable/bg_register_btn_shape"
             android:text="@string/register"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/common_bg"
             android:textSize="@dimen/sp_18"
             />
     </LinearLayout>

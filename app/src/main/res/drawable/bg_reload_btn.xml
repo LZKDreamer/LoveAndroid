@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/colorWhite"/>
-    <stroke android:color="@color/colorPrimaryToolbar"
+    <solid android:color="@color/common_bg"/>
+    <stroke android:color="@color/toolbar"
         android:width="@dimen/dp_1"/>
     <corners android:radius="20dp"/>
 </shape>

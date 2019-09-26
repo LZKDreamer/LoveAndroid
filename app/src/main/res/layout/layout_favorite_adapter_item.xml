@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_article_author"
+                    android:textColor="@color/item_article_author"
                     android:text="作者"
                     android:layout_alignParentLeft="true"/>
                 <TextView
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_article_author"
+                    android:textColor="@color/item_article_author"
                     android:text="类别"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_dark"
+                    android:textColor="@color/common_text_default"
                     android:text="题目"
                     android:ellipsize="end"
                     android:maxLines="1"/>
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_article_desc"
+                    android:textColor="@color/item_article_desc"
                     android:text="描述"
                     android:layout_marginTop="@dimen/dp_5"
                     android:ellipsize="end"
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_article_time"
+                    android:textColor="@color/item_article_time"
                     android:text="时间"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"/>

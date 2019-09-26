@@ -55,7 +55,7 @@ public class CollectionActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryToolbar));
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.toolbar));
         ButterKnife.bind(this);
         setSupportActionBar(mCommonToolbar);
         ActionBar actionBar = getSupportActionBar();

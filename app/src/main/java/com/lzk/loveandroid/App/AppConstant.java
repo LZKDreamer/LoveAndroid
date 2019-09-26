@@ -1,7 +1,5 @@
 package com.lzk.loveandroid.App;
 
-import android.graphics.Color;
-
 import androidx.core.content.ContextCompat;
 
 import com.lzk.loveandroid.R;
@@ -19,11 +17,11 @@ public class AppConstant {
 
     //常用网站标签背景色
     public static final int[] TAG_COLORS = new int[]{
-            ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_one),
-            ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_two),
-            ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_three),
-            ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_four),
-            ContextCompat.getColor(MyApplication.getContext(),R.color.color_tag_five),
+            ContextCompat.getColor(MyApplication.getContext(),R.color.flow_tag_one),
+            ContextCompat.getColor(MyApplication.getContext(),R.color.flow_tag_two),
+            ContextCompat.getColor(MyApplication.getContext(),R.color.flow_tag_three),
+            ContextCompat.getColor(MyApplication.getContext(),R.color.flow_tag_four),
+            ContextCompat.getColor(MyApplication.getContext(),R.color.flow_tag_five),
     };
 
     //夜间模式

@@ -4,14 +4,14 @@
     android:id="@+id/common_toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_50"
-    android:background="@color/colorPrimaryToolbar"
+    android:background="@color/toolbar"
     app:layout_scrollFlags="scroll|enterAlways|snap">
     <TextView
         android:id="@+id/common_toolbar_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_18"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/common_bg"
         android:layout_gravity="start"
         android:singleLine="true"
         android:ellipsize="marquee"

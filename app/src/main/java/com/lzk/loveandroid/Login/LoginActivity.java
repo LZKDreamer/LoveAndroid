@@ -17,7 +17,6 @@ import com.lzk.loveandroid.Base.BaseActivity;
 import com.lzk.loveandroid.EventBus.Event;
 import com.lzk.loveandroid.EventBus.EventConstant;
 import com.lzk.loveandroid.EventBus.EventUtil;
-import com.lzk.loveandroid.Home.Bean.Home.HomeArticle;
 import com.lzk.loveandroid.R;
 import com.lzk.loveandroid.Register.RegisterActivity;
 import com.lzk.loveandroid.Request.IResultCallback;
@@ -58,7 +57,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.colorWhite));
+        StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.common_bg));
     }
 
     @OnClick({R.id.login_back_iv, R.id.login_login_btn, R.id.login_register_btn})

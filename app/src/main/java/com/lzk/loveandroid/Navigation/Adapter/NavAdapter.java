@@ -3,13 +3,11 @@ package com.lzk.loveandroid.Navigation.Adapter;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -40,7 +38,7 @@ public class NavAdapter extends BaseQuickAdapter<NavigationBean.DataBean, BaseVi
                 TextView textView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_flow_tag,mTagFLowLayout,false)
                         .findViewById(R.id.flow_tag_tv);
                 textView.setText(articlesBean.getTitle());
-                textView.setBackgroundColor(ContextCompat.getColor(parent.getContext(),R.color.color_bg_light_grey));
+                textView.setBackgroundColor(ContextCompat.getColor(parent.getContext(),R.color.bg_light_grey));
                 textView.setTextColor(CommonUtil.getFlowTagBackgroudColor());
                 return textView;
             }

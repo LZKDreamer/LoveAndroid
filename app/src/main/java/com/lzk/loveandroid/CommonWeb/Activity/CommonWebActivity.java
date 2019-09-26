@@ -25,8 +25,6 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,7 +43,7 @@ public class CommonWebActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryToolbar));
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.toolbar));
         setSupportActionBar(commonToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

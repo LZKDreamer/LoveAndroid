@@ -67,7 +67,7 @@ public class SearchListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mContext = this;
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryToolbar));
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.toolbar));
         //ActionBar
         setSupportActionBar(commonToolbar);
         ActionBar actionBar = getSupportActionBar();

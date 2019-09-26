@@ -73,7 +73,7 @@ public class SearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         ButterKnife.bind(this);
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryToolbar));
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.toolbar));
         loadHotKey();
         loadHistoryData();
         initEditTextSearchEvent();
