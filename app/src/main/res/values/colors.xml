@@ -4,10 +4,15 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="common_bg">#ffffff</color>
+    <color name="common_toolbar_title">#ffffff</color>
     <color name="common_text_default">#000000</color>
+    <color name="bg_card_view">#ffffff</color>
     <color name="toolbar">#3CB371</color>
     <color name="tab_item_default">#A9A9A9</color>
     <color name="tab_item_select">#3CB371</color>
+    <color name="tab_text_default">#A9A9A9</color>
+    <color name="tab_text_select">#ffffff</color>
+    <color name="tab_indicator">#ffffff</color>
     <color name="item_article_tag">#D81B60</color>
     <color name="item_article_author">#808080</color>
     <color name="item_article_time">#D3D3D3</color>
@@ -19,6 +24,7 @@
     <color name="common_dialog_content">#A9A9A9</color>
     <color name="common_dialog_cancel">#A9A9A9</color>
     <color name="common_dialog_confirm">#3CB371</color>
+    <color name="drawer_header_text">#ffffff</color>
     <color name="flow_tag_one">#00ffd3</color>
     <color name="flow_tag_two">#00a0ff</color>
     <color name="flow_tag_three">#00ff8e</color>

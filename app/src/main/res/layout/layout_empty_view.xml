@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/empty_group_fl"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/common_bg">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -28,6 +29,8 @@
             android:layout_height="wrap_content"
             android:text="@string/reload"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/common_text_default"
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/bg_reload_btn"/>
     </LinearLayout>

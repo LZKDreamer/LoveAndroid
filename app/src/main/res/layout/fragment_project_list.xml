@@ -25,7 +25,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/project_list_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/common_bg">
 
                 </androidx.recyclerview.widget.RecyclerView>
                 <com.scwang.smartrefresh.layout.footer.ClassicsFooter

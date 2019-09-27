@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_18"
-        android:textColor="@color/common_bg"
+        android:textColor="@color/common_toolbar_title"
         android:layout_gravity="start"
         android:singleLine="true"
         android:ellipsize="marquee"

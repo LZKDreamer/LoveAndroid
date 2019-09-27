@@ -111,8 +111,15 @@ public class CommonWebActivity extends BaseActivity {
             @Override
             public View getView(FlowLayout parent, int position, CommonWebBean.DataBean dataBean) {
                 TextView mTagTv = (TextView) LayoutInflater.from(MyApplication.getContext()).inflate(R.layout.layout_flow_tag,parent,false);
-                mTagTv.setText(dataBean.getName());
-                mTagTv.setBackgroundColor(CommonUtil.getFlowTagBackgroudColor());
+                if (CommonUtil.isNightMode()){
+                    mTagTv.setText(dataBean.getName());
+                    mTagTv.setBackgroundColor(ContextCompat.getColor(CommonWebActivity.this,R.color.bg_light_grey));
+                    mTagTv.setTextColor(CommonUtil.getFlowTagBackgroudColor());
+                }else {
+                    mTagTv.setText(dataBean.getName());
+                    mTagTv.setBackgroundColor(CommonUtil.getFlowTagBackgroudColor());
+                    mTagTv.setTextColor(ContextCompat.getColor(CommonWebActivity.this,R.color.bg_light_grey));
+                }
                 return mTagTv;
             }
         });

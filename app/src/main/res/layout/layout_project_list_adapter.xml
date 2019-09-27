@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_5"
     android:layout_marginBottom="@dimen/dp_5"
-    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/bg_card_view"
     app:cardCornerRadius="@dimen/dp_0">
     <LinearLayout
         android:orientation="horizontal"

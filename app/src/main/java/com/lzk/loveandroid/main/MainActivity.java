@@ -1,6 +1,7 @@
 package com.lzk.loveandroid.main;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -96,73 +98,10 @@ public class MainActivity extends BaseActivity {
         mTransaction = mFragmentManager.beginTransaction();
         setDefaultFragment();
 
-        //DrawerNav
-        mUsernameTv = mMainNavView.getHeaderView(0).findViewById(R.id.header_username_tv);
-        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
-            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(true);
-            mUsernameTv.setText(SPUtil.getInstance().getString(AppConstant.USERNAME,""));
-        }else {
-            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(false);
-        }
-        mMainBottomNavView.setSelectedItemId(R.id.tab_home);
-        mMainNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.header_favorite://收藏
-                        //mMainDrawerLayout.closeDrawers();
-                        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
-                            Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
-                            startActivity(intent);
-                        }else {
-                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                            startActivity(intent);
-                        }
-                        break;
-                    case R.id.header_day_night_mode://夜间模式
-                        if (CommonUtil.isNightMode()){
-                            menuItem.setTitle(getString(R.string.drawer_nav_day_mode));
-                            CommonUtil.setDayNightMode(false);
-                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,false);
-                        }else {
-                            menuItem.setTitle(getString(R.string.drawer_nav_night_mode));
-                            CommonUtil.setDayNightMode(true);
-                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,true);
-                        }
-                        break;
-                    case R.id.header_setting://设置
-                        //mMainDrawerLayout.closeDrawers();
-                        break;
-                    case R.id.header_about_us://关于我们
-                        //mMainDrawerLayout.closeDrawers();
-                        break;
-                    case R.id.header_logout://退出登录
-                        CommonDialog dialog = new CommonDialog(MainActivity.this, getString(R.string.prompt)
-                                , getString(R.string.is_logout), getString(R.string.sure_logout), getString(R.string.cancel),
-                                new CommonDialog.DialogClickListener() {
-                                    @Override
-                                    public void onDialogClick() {
-                                        logout();
-                                    }
-                                });
-                        dialog.show();
-                        break;
-                }
-                return true;
-            }
-        });
-        mUsernameTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
-                    Intent login = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(login);
-                }
-            }
-        });
+        //NavigationView
+        initNavigationView();
 
         //BottomNav
-        //BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
         mMainBottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -345,6 +284,88 @@ public class MainActivity extends BaseActivity {
 
         }
 
+    }
+
+    private void initNavigationView(){
+        //DrawerNav
+        mUsernameTv = mMainNavView.getHeaderView(0).findViewById(R.id.header_username_tv);
+        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(true);
+            mUsernameTv.setText(SPUtil.getInstance().getString(AppConstant.USERNAME,""));
+        }else {
+            mMainNavView.getMenu().findItem(R.id.header_logout).setVisible(false);
+        }
+        mMainBottomNavView.setSelectedItemId(R.id.tab_home);
+        //初始化夜间模式
+        MenuItem nightModeItem =mMainNavView.getMenu().findItem(R.id.header_day_night_mode);
+        if (CommonUtil.isNightMode()){
+            nightModeItem.setTitle(getString(R.string.drawer_nav_day_mode));
+            nightModeItem.setIcon(R.drawable.icon_nav_day_mode);
+        }else {
+            nightModeItem.setTitle(getString(R.string.drawer_nav_night_mode));
+            nightModeItem.setIcon(R.drawable.icon_nav_night_mode);
+        }
+        //监听事件
+        mMainNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.header_favorite://收藏
+                        //mMainDrawerLayout.closeDrawers();
+                        if (SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+                            Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
+                    case R.id.header_day_night_mode://夜间模式
+                        if (CommonUtil.isNightMode()){
+                            menuItem.setTitle(getString(R.string.drawer_nav_night_mode));
+                            menuItem.setIcon(R.drawable.icon_nav_night_mode);
+                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,false);
+                            AppCompatDelegate.setDefaultNightMode(
+                                    AppCompatDelegate.MODE_NIGHT_NO);
+                        }else {
+                            menuItem.setTitle(getString(R.string.drawer_nav_day_mode));
+                            menuItem.setIcon(R.drawable.icon_nav_day_mode);
+                            SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,true);
+                            AppCompatDelegate.setDefaultNightMode(
+                                    AppCompatDelegate.MODE_NIGHT_YES);
+                        }
+                        recreate();
+                        break;
+                    case R.id.header_setting://设置
+                        //mMainDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.header_about_us://关于我们
+                        //mMainDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.header_logout://退出登录
+                        CommonDialog dialog = new CommonDialog(MainActivity.this, getString(R.string.prompt)
+                                , getString(R.string.is_logout), getString(R.string.sure_logout), getString(R.string.cancel),
+                                new CommonDialog.DialogClickListener() {
+                                    @Override
+                                    public void onDialogClick() {
+                                        logout();
+                                    }
+                                });
+                        dialog.show();
+                        break;
+                }
+                return true;
+            }
+        });
+        mUsernameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!SPUtil.getInstance().getBoolean(AppConstant.USER_LOGIN_STATUS,false)){
+                    Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(login);
+                }
+            }
+        });
     }
 
     /**

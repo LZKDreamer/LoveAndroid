@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_5"
-    android:textColor="@color/common_bg"
+    android:textColor="@color/common_text_default"
     android:text="@string/website"
     android:padding="@dimen/dp_5"
     android:background="@color/flow_tag_one">

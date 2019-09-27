@@ -6,7 +6,7 @@
         android:id="@+id/home_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
-        android:padding="@dimen/dp_10">
+        android:background="@color/common_bg">
 
     </com.youth.banner.Banner>
 </LinearLayout>

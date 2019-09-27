@@ -39,7 +39,13 @@ public class MyApplication extends Application {
         LitePal.initialize(this);
 
         //设置夜间模式
-        CommonUtil.setDayNightMode(CommonUtil.isNightMode());
+        if (CommonUtil.isNightMode()){
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public static synchronized Context getContext(){

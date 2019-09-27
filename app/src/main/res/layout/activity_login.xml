@@ -33,7 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_40"
         android:elevation="@dimen/dp_3"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:background="@color/common_bg">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
