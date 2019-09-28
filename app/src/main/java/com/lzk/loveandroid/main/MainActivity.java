@@ -325,16 +325,20 @@ public class MainActivity extends BaseActivity {
                             menuItem.setTitle(getString(R.string.drawer_nav_night_mode));
                             menuItem.setIcon(R.drawable.icon_nav_night_mode);
                             SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,false);
-                            AppCompatDelegate.setDefaultNightMode(
-                                    AppCompatDelegate.MODE_NIGHT_NO);
                         }else {
                             menuItem.setTitle(getString(R.string.drawer_nav_day_mode));
                             menuItem.setIcon(R.drawable.icon_nav_day_mode);
                             SPUtil.getInstance().putBoolean(AppConstant.NIGHT_MODE,true);
-                            AppCompatDelegate.setDefaultNightMode(
-                                    AppCompatDelegate.MODE_NIGHT_YES);
+                            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         }
+                        getDelegate().setLocalNightMode((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
                         recreate();
+
+                        AppCompatDelegate.setDefaultNightMode(CommonUtil.isNightMode() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+//                        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+//                        startActivity(intent);
+//                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//                        finish();
                         break;
                     case R.id.header_setting://设置
                         //mMainDrawerLayout.closeDrawers();

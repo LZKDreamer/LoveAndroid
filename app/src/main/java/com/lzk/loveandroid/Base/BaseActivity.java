@@ -3,6 +3,7 @@ package com.lzk.loveandroid.Base;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.hjq.toast.ToastUtils;
 import com.lzk.loveandroid.EventBus.Event;
 import com.lzk.loveandroid.EventBus.EventUtil;
 import com.lzk.loveandroid.R;
+import com.lzk.loveandroid.Utils.CommonUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

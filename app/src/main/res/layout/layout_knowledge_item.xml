@@ -10,7 +10,6 @@
     android:layout_marginLeft="@dimen/dp_2"
     android:layout_marginRight="@dimen/dp_2"
     android:background="@color/common_bg"
-    android:foreground="?attr/selectableItemBackground"
     >
     <LinearLayout
         android:orientation="vertical"

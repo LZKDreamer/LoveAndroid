@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+    <color name="bg_primary">#3CB371</color>
     <color name="common_bg">#000000</color>
     <color name="common_toolbar_title">#ffffff</color>
     <color name="common_text_default">#dbd3d7</color>
@@ -34,5 +35,41 @@
     <color name="search_hint">#d8ecef</color>
     <color name="hot_search_tag">#ff3000</color>
     <color name="search_common">#00ddff</color>
-    <color name="bg_light_grey">#2b2428</color>
+    <color name="bg_light_grey">#2b2428</color>-->
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="bg_primary">#3CB371</color>
+    <color name="common_bg">#ffffff</color>
+    <color name="common_toolbar_title">#ffffff</color>
+    <color name="common_text_default">#000000</color>
+    <color name="bg_card_view">#ffffff</color>
+    <color name="toolbar">#3CB371</color>
+    <color name="tab_item_default">#A9A9A9</color>
+    <color name="tab_item_select">#3CB371</color>
+    <color name="tab_text_default">#A9A9A9</color>
+    <color name="tab_text_select">#ffffff</color>
+    <color name="tab_indicator">#ffffff</color>
+    <color name="item_article_tag">#D81B60</color>
+    <color name="item_article_author">#808080</color>
+    <color name="item_article_time">#D3D3D3</color>
+    <color name="item_article_desc">#726d70</color>
+    <color name="divider_line">#E0E0E0</color>
+    <color name="bg_login_btn">#D81B60</color>
+    <color name="bg_register_btn">#3CB371</color>
+    <color name="common_dialog_title">#000000</color>
+    <color name="common_dialog_content">#A9A9A9</color>
+    <color name="common_dialog_cancel">#A9A9A9</color>
+    <color name="common_dialog_confirm">#3CB371</color>
+    <color name="drawer_header_text">#ffffff</color>
+    <color name="flow_tag_one">#00ffd3</color>
+    <color name="flow_tag_two">#00a0ff</color>
+    <color name="flow_tag_three">#00ff8e</color>
+    <color name="flow_tag_four">#00f4ff</color>
+    <color name="flow_tag_five">#ffc900</color>
+    <color name="bg_search_btn">#ee3400</color>
+    <color name="search_hint">#d8ecef</color>
+    <color name="hot_search_tag">#ff3000</color>
+    <color name="search_common">#00ddff</color>
+    <color name="bg_light_grey">#EEEEEE</color>
 </resources>

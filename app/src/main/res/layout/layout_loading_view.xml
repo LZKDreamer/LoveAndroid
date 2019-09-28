@@ -13,7 +13,8 @@
             android:id="@+id/loading_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foregroundTint="@color/colorAccent"/>
+            android:progressBackgroundTint="@color/bg_primary"
+            android:backgroundTintMode="src_atop"/>
         <TextView
             android:id="@+id/loading_tip_tv"
             android:layout_width="wrap_content"

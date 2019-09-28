@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".Collection.CollectionActivity"></activity>
         <activity android:name=".Knowledge.Activity.KnowledgeListActivity" />
         <activity android:name=".Search.Activity.SearchListActivity" />
